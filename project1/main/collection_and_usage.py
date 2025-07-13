@@ -1,4 +1,4 @@
-from misc import do_nothing
+from main.misc import do_nothing
 
 
 def collection_and_usage():  # Collection and usage method: List, Tuple, Set, Dictionary

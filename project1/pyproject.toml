@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project1"
+version = "0.0.0"
+description = "Test Project1"
+authors = [
+    { name = "Sandeep Kumar", email = "test@test.com" }
+]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "PyYAML~=6.0",
+    "python-gitlab~=3.15.0",
+    "colorama~=0.4.6",
+    "pytest~=7.4.0",
+    "coverage~=7.9.1",
+    "pytest-cov~=5.0.0",
+    "numpy~=2.3.1",
+    "setuptools~=80.9.0"
+]
+
+[project.urls]
+Homepage = "https://www.siddhivinayaksk.co.in/"
+
+[project.scripts]
+project1 = "entry:main"
+
+[tool.setuptools.packages.find]
+where = ["."]

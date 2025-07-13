@@ -39,28 +39,30 @@ pip install --upgrade wheel # upgrade wheel
 URL: https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/
 
 
-Local Install:
+## Local Install as package:
 python -m pip install -e .
 
-Uninstall:
-python -m pip uninstall project1
-
-Package:
+## Package:
 python -m pip install build
 
-Source Distro:
+## Source Distro:
 python -m build --sdist
 
-Wheel:
+## Wheel:
 python -m build --wheel
-python -m pip install .\dist\project1-0.0.0-py3-none-any.whl
+python -m pip install .\dist\project1-0.0.0-py3-none-any.whl --force-reinstall
 
 
-Check dist and upload on pypi:
+## Check dist and upload on pypi:
 twine check dist/*
 twine upload dist/*
 
 
+## Run project
+project1
+
+## Uninstall:
+python -m pip uninstall project1
 
 https://packaging.python.org/en/latest/glossary/#term-Python-Package-Index-PyPI
 configure auth token with $HOME/.pypirc

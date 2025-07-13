@@ -1,10 +1,10 @@
-from variables_and_types import variables_and_types as variables
-from collection_and_usage import collection_and_usage
-from file_handling import file_handing
-from numpy_usage import numpy_test
-from misc import test_misc
-from control_statements import control_statements
-from class_and_object import class_and_object
+from main.variables_and_types import variables_and_types as variables
+from main.collection_and_usage import collection_and_usage
+from main.file_handling import file_handing
+from main.numpy_usage import numpy_test
+from main.misc import test_misc
+from main.control_statements import control_statements
+from main.class_and_object import class_and_object
 from project.config.env import os_name
 from project.config_utils import toLower
 from project.logger import Logger
@@ -37,6 +37,13 @@ def startup():
     file_handing()  # Run file handling method from file_handling.py
     numpy_test()  # Run numpy test method from numpy_usage.py
 
+
+def main():
+    """
+    This method is called when the program starts
+    Note: This method is called only once
+    """
+    startup()
 
 if __name__ == '__main__':
     startup()
