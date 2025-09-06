@@ -36,3 +36,7 @@ nosetests.xml
 /.idea/
 /temp/
 */.idea/*
+.env
+azure_env
+azure_wsl
+output_dir

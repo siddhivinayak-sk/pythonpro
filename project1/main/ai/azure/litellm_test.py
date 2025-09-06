@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 from litellm import completion
 
-load_dotenv(dotenv_path="C:/sandeep/work/trails/pythonpro/project1/azure_env/.env")
+load_dotenv()
 
 os.environ["AZURE_API_KEY"] = os.environ["AZURE_OPENAI_API_KEY"]
 os.environ["AZURE_API_BASE"] = os.environ["AZURE_OPENAI_ENDPOINT"]

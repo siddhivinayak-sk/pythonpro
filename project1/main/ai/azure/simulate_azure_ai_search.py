@@ -8,7 +8,7 @@ from azure.ai.evaluation.simulator import Simulator
 import asyncio
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path="C:/sandeep/work/trails/pythonpro/project1/azure_env/.env")
+load_dotenv()
 
 
 

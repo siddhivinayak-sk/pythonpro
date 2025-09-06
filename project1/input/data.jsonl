@@ -1,0 +1,2 @@
+{"query":"What is SBCP?", "response":"SBCP is short form of Sopra Banking Cloud Platform. It provides cloud-based platform to develop application based on microservices architecture using JVM-based languages like Java or Kotlin."}
+{"query":"What is ABAM?", "response":"Authentication Broker and Authorization Management (ABAM) is an application which provides cloud-based authentication and authorization management for SBCP platform."}

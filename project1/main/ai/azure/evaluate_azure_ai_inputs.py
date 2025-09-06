@@ -6,7 +6,7 @@ import pandas as pd
 import os
 from pprint import pprint
 
-load_dotenv(dotenv_path="C:/sandeep/work/trails/pythonpro/project1/azure_env/.env")
+load_dotenv()
 
 from azure.ai.evaluation import evaluate
 from azure.ai.evaluation import RelevanceEvaluator

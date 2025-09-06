@@ -3,7 +3,7 @@ import os
 import base64
 from openai import AzureOpenAI
 
-load_dotenv(dotenv_path="C:/sandeep/work/trails/pythonpro/project1/azure_env/.env")
+load_dotenv()
 
 search_endpoint = os.getenv("AZURE_AI_SEARCH_ENDPOINT")
 search_key = os.getenv("AZURE_AI_SEARCH_KEY")
