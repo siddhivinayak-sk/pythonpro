@@ -1,6 +1,6 @@
 {
   "name": "oai-chat",
-  "publisher": "SKT",
+  "publisher": "siddhivinayak-sk",
   "displayName": "OAI Chat",
   "description": "A VS Code extension to chat with Azure OpenAI and Azure AI Search, with file attachment and formatted response panel.",
   "version": "0.0.1",
