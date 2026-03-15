@@ -40,3 +40,12 @@ nosetests.xml
 azure_env
 azure_wsl
 output_dir
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
