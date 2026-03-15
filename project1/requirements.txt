@@ -5,14 +5,12 @@ matplotlib
 scikit-learn
 seaborn
 tensorflow
-keras
 flask
 sqlalchemy
 pytest
 beautifulsoup4
-lxml
-pytest-cov
 aiohttp
 httpx
 openai
 langchain
+github-copilot-sdk
