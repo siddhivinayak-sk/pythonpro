@@ -1,0 +1,41 @@
+FROM python:3.13-slim-bookworm as builder
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        gnupg \
+        libsecret-1-0 \
+        libsecret-tools \
+        gnome-keyring \
+        vim \
+    && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y --no-install-recommends nodejs \
+    && rm -rf /var/lib/apt/lists/* \
+    && npm install -g npm \
+    && npm install -g @github/copilot \
+    && curl -fsSL https://github.com/cli/cli/releases/download/v2.59.0/gh_2.59.0_linux_amd64.tar.gz \
+       | tar -xz -C /usr/local --strip-components=1 gh_2.59.0_linux_amd64/bin/gh
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt \
+    && rm /tmp/requirements.txt
+RUN groupadd -r appgroup && useradd -r -g appgroup -u 1001 -m -d /home/appuser appuser
+WORKDIR /app
+COPY my_copilot.py .
+RUN chown appuser:appgroup my_copilot.py && chmod 550 my_copilot.py
+
+RUN node --version
+RUN npm --version
+RUN gh --version
+RUN python --version
+RUN copilot --version
+
+ENV GITLAB_TOKEN \
+    GITLAB_HOST \
+    COPILOT_GITHUB_TOKEN \
+    GH_TOKEN \
+    GITHUB_TOKEN
+USER appuser
+ENTRYPOINT ["python", "my_copilot.py"]
+
+# docker build -t mr-copilot-review project1/main/copilotsdk/
+# docker run --rm -e GITLAB_TOKEN=$env:GITLAB_API_TOKEN -e GITLAB_HOST=$env:MY_GITLAB_LINK -e COPILOT_GITHUB_TOKEN=$env:_COPILOT_GITHUB_TOKEN -e MR_URL="https://gitlab.sbs-software.com/sbs-cloud/sbcp/cs/core-security/abam/quickstart/private-cloud-abam-quick-start/-/merge_requests/111"  mr-copilot-review 

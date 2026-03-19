@@ -14,3 +14,4 @@ httpx
 openai
 langchain
 github-copilot-sdk
+python-gitlab
