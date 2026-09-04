@@ -6,6 +6,9 @@ index status. The pipeline itself lives in the ``ai_agent_rag`` core modules; th
 
 from __future__ import annotations
 
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
+
 from ai_agent_core import configure_logging, get_logger, load_config
 from ai_agent_core.schemas import HealthStatus, RetrieveRequest, RetrieveResponse
 from ai_agent_core.web import install_observability
@@ -30,7 +33,25 @@ def create_app(settings: RagSettings | None = None, service: RagService | None =
     if service is None:
         service = RagService(build_config(settings), settings)
 
-    app = FastAPI(title="AI-Agent RAG API", version=__version__)
+    active_service = service
+
+    @asynccontextmanager
+    async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
+        scheduler = None
+        jobs = active_service.config.indexer.jobs
+        if settings.enable_scheduler and jobs:
+            from .scheduler import IndexScheduler
+
+            scheduler = IndexScheduler(active_service.config, active_service.indexer)
+            scheduler.start()
+            log.info("scheduler_started", jobs=len(jobs))
+        try:
+            yield
+        finally:
+            if scheduler is not None:
+                scheduler.shutdown()
+
+    app = FastAPI(title="AI-Agent RAG API", version=__version__, lifespan=lifespan)
     app.state.service = service
     install_observability(
         app,

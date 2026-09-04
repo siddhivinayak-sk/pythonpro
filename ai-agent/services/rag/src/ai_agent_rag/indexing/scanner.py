@@ -48,6 +48,9 @@ def scan_directory(
         for path in root.glob(pattern):
             if not path.is_file():
                 continue
+            # Honor `recursive: false` regardless of the include glob (e.g. the default "**/*").
+            if not source.recursive and path.parent != root:
+                continue
             if supported_extensions is not None and path.suffix.lower() not in supported_extensions:
                 continue
             rel = path.relative_to(root)

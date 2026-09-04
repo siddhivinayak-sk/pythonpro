@@ -20,10 +20,21 @@ dependencies = [
 
 # Heavy / backend-specific dependencies are optional and imported lazily.
 [project.optional-dependencies]
+# Vector stores
 pgvector = ["psycopg[binary]>=3.2", "pgvector>=0.3"]
 chroma = ["chromadb>=0.5"]
+qdrant = ["qdrant-client>=1.10"]
+milvus = ["pymilvus>=2.4"]
+# Ingestion
 ingestion = ["docling>=2.0"]        # multi-format parsing (PDF/Office/images w/ OCR)
+# Embedding providers (huggingface/ollama already covered by base deps + the hf extra)
 embeddings-hf = ["sentence-transformers>=3.0"]
+embeddings-openai = ["langchain-openai>=0.2"]   # openai + azure_openai
+embeddings-bedrock = ["langchain-aws>=0.2"]
+postgresml = ["psycopg[binary]>=3.2"]           # in-DB pgml.embed()
+# Retrieval
+rerank = ["sentence-transformers>=3.0"]          # cross-encoder reranking (CrossEncoder)
+# (hybrid search needs no extra: the BM25 sparse index is dependency-free)
 
 [project.scripts]
 ai-agent-rag = "ai_agent_rag.app:main"

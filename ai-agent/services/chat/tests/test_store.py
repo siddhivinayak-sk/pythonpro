@@ -62,3 +62,25 @@ def test_context_files_crud() -> None:
     assert listed[0]["text"] == "some context text"
     assert store.delete_context(conv["id"], added["id"], "u1") is True
     assert store.list_context(conv["id"]) == []
+
+
+def test_delete_conversation_also_removes_context_files() -> None:
+    store = _store()
+    conv = store.create_conversation("u1")
+    store.add_context(conv["id"], "u1", "notes.txt", "sensitive data")
+    assert store.list_context(conv["id"]) != []
+    assert store.delete_conversation("u1", conv["id"]) is True
+    assert store.list_context(conv["id"]) == []  # no orphaned context rows
+
+
+def test_delete_workflow_also_removes_runs() -> None:
+    from datetime import datetime
+
+    store = _store()
+    wf = store.create_workflow("u1", "wf", {"steps": []})
+    store.record_run(
+        wf["id"], "u1", status="ok", inputs={}, output="x", trace=[], started_at=datetime.now()
+    )
+    assert store.list_runs(wf["id"]) != []
+    assert store.delete_workflow("u1", wf["id"]) is True
+    assert store.list_runs(wf["id"]) == []  # no orphaned run rows

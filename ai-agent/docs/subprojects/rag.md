@@ -4,7 +4,8 @@
 its own or alongside the conversation front end.*
 
 > **Implementation status: Phase 2 complete.** Pluggable vector stores (pgvector default; in-memory for
-> tests), configurable embeddings (hashing/HF/Ollama) + dimension validation, four chunking strategies,
+> tests; plus chroma, qdrant, milvus), configurable embeddings
+> (hashing/huggingface/ollama/openai/azure_openai/bedrock/postgresml) + dimension validation, four chunking strategies,
 > native + Docling loaders, directory scanning with change detection, incremental/full indexing, an
 > APScheduler cron indexer, and the retrieval API are implemented and tested end-to-end. See
 > [`services/rag/README.md`](../../services/rag/README.md). The pgvector path requires a live database
@@ -120,15 +121,17 @@ class VectorStoreAdapter(Protocol):
 
 ### 3.2 Supported backends
 
-| Backend | Package | When to use | Hybrid search |
-|---------|---------|-------------|---------------|
-| **Chroma** | `langchain-chroma` | Local prototyping, tests | Limited |
-| **pgvector** | `langchain-postgres` | Already on Postgres; ≤ ~1M vectors; metadata + joins | Via SQL + FTS |
-| **Qdrant** | `langchain-qdrant` | Open-source production; native hybrid | Native (dense + sparse) |
-| **Milvus** | `langchain-milvus` | Billion-scale / clustered | Native |
+| Backend | Package / extra | When to use | Hybrid search |
+|---------|-----------------|-------------|---------------|
+| **memory** | built-in | Tests / dev; no external service | No |
+| **Chroma** | `chromadb` (`chroma`) | Local prototyping, tests | Limited |
+| **pgvector** | `psycopg` + `pgvector` (`pgvector`) | Already on Postgres; ≤ ~1M vectors; metadata + joins | Via SQL + FTS |
+| **Qdrant** | `qdrant-client` (`qdrant`) | Open-source production; native hybrid | Native (dense + sparse) |
+| **Milvus** | `pymilvus` (`milvus`) | Billion-scale / clustered | Native |
 
-Selection is by config (`vector_store.backend`); the **default is `pgvector`**. A **factory** instantiates
-the right adapter. Adding a backend = one new adapter class; consumers are unchanged.
+Selection is by config (`vector_store.backend`); the **default is `pgvector`**. A **factory**
+(`build_vector_store`) instantiates the right adapter and each backend SDK is **lazy-imported**, so only
+the chosen store's package is required. Adding a backend = one new adapter class; consumers are unchanged.
 
 ### 3.3 Collection specification
 
@@ -161,7 +164,7 @@ the query path (indexing and querying must use the *same* embedder):
 embeddings:
   profiles:
     - id: bge-m3-1024
-      provider: huggingface           # huggingface | ollama | openai
+      provider: huggingface           # hashing | huggingface | ollama | openai | azure_openai | bedrock | postgresml
       model: BAAI/bge-m3
       dimension: 1024                  # for Matryoshka models; else the model's native dim
       normalize: true
@@ -185,6 +188,13 @@ embeddings:
 | Balanced local | nomic-embed-text | 768 | Ollama-native, ~0.3 GB |
 | Quality/VRAM | Qwen3-Embedding-0.6B | up to 1024 | Strong quality per VRAM; Ollama-native |
 | Multilingual/hybrid | BGE-M3 | up to 1024 | 8K context, 100+ languages, dense + sparse |
+| Cloud API | text-embedding-3-large (`openai` / `azure_openai`) | up to 3072 | Managed; no local GPU |
+| Cloud API | amazon.titan-embed-text-v2:0 (`bedrock`) | up to 1024 | AWS-hosted |
+| In-database | e.g. e5-small-v2 (`postgresml`) | model-native | Computed in Postgres via `pgml.embed()` |
+
+Providers `openai`, `azure_openai`, and `bedrock` are built through the shared `ai_agent_core` embeddings
+factory (one place for keys, Azure endpoint/version, Bedrock region/profile); `postgresml` runs the model
+inside PostgreSQL. All non-local providers are lazy-imported behind their extras.
 
 ### 4.3 Configurable dimensions
 
@@ -399,13 +409,27 @@ knowing store internals. This satisfies RAG-5.
 
 ### 8.3 Retrieval features
 
-- **Hybrid search** (dense + sparse) where the backend supports it (Qdrant/Milvus natively; pgvector via
-  FTS).
-- **Optional reranking** with a cross-encoder for precision.
-- **Metadata filtering** (path, type, tags, date) for scoped retrieval.
+- **Hybrid search** (dense + sparse). Request `mode: hybrid` to fuse dense vector results with a lexical
+  index using **Reciprocal Rank Fusion**. The sparse arm is pluggable behind a `SparseRetriever` protocol
+  (`retrieval.sparse_backend`): **`bm25`** (default) is a dependency-free in-process Okapi BM25 index
+  (rebuilt by (re)indexing after a restart); **`pgfts`** is a **persistent, multi-replica** PostgreSQL
+  full-text backend (GENERATED `tsvector` + GIN index, `websearch_to_tsquery` + `ts_rank_cd`) that reuses
+  the pgvector DSN. Both are populated during indexing and honor the same metadata filters.
+- **Optional reranking** with a cross-encoder for precision. Set `retrieval.rerank_model` (e.g.
+  `BAAI/bge-reranker-base`, needs the `rerank` extra) or send `{"rerank": true}`; the service fetches a
+  larger candidate pool (`retrieval.candidates`) then reranks to `k`. Default is a no-op reranker.
+- **Metadata filtering** (path, type, tags, date) for scoped retrieval. Implemented as equality plus
+  `$contains` (case-insensitive substring) on the in-memory/BM25 and pgvector backends; qdrant/milvus
+  honor simple equality. The configured `distance` (cosine/l2/ip) is honored on all backends.
 - **Citations** returned with every hit so the front end can attribute answers.
 - **Consistency guarantee**: the API always embeds queries with the *same* profile the collection was
   indexed with.
+
+> **`k`** falls back to `retrieval.default_k` when the request omits it. Scheduled indexing runs
+> in-process via APScheduler when `indexer.jobs` are configured (disable on API-only replicas with
+> `RAG_ENABLE_SCHEDULER=false`). PDF/Office/image ingestion (Docling) is enabled with
+> `RAG_ENABLE_DOCLING=true` (needs the `ingestion` extra); otherwise those files are skipped at scan time.
+> Chunk `overlap_tokens` currently applies to the `fixed` strategy only.
 
 ### 8.4 Integration contract
 

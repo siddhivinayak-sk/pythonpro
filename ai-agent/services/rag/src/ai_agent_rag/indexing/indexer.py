@@ -16,6 +16,7 @@ from ..chunking import Chunker, build_chunker
 from ..config import EmbeddingProfile, RagConfig
 from ..embeddings import Embedder, build_embedder
 from ..loaders import LoaderRegistry, build_default_registry
+from ..sparse import SparseRetriever
 from ..vectorstore import VectorStore
 from .scanner import scan_directory
 from .store import IndexStore
@@ -48,10 +49,12 @@ class Indexer:
         embedder_factory: Callable[[EmbeddingProfile], Embedder] = build_embedder,
         chunker_factory: Callable = build_chunker,
         use_docling: bool = False,
+        sparse_index: SparseRetriever | None = None,
     ) -> None:
         self.config = config
         self.store = store
         self.vector_store = vector_store
+        self.sparse_index = sparse_index
         self.loaders = loader_registry or build_default_registry(use_docling=use_docling)
         self._embedder_factory = embedder_factory
         self._chunker_factory = chunker_factory
@@ -84,6 +87,8 @@ class Indexer:
         deleted = 0
         for stale_id in self.store.list_source_ids(name) - set(current):
             self.vector_store.delete_by_source(name, stale_id)
+            if self.sparse_index is not None:
+                self.sparse_index.delete_by_source(name, stale_id)
             self.store.delete_file(name, stale_id)
             deleted += 1
 
@@ -104,9 +109,13 @@ class Indexer:
                 doc = loader.load(scanned_file.path, source_id)
                 chunks = chunker.split(doc)
                 self.vector_store.delete_by_source(name, source_id)  # replace prior chunks
+                if self.sparse_index is not None:
+                    self.sparse_index.delete_by_source(name, source_id)
                 if chunks:
                     vectors = embedder.embed_documents([c.text for c in chunks])
                     self.vector_store.upsert(name, chunks, vectors)
+                    if self.sparse_index is not None:
+                        self.sparse_index.index(name, chunks)
                     upserted += len(chunks)
                 self.store.upsert_file(
                     name,

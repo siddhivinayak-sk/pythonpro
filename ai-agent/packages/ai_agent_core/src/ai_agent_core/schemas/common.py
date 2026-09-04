@@ -45,7 +45,7 @@ class Hit(BaseModel):
 class RetrieveRequest(BaseModel):
     collection: str
     query: str
-    k: int = 6
+    k: int | None = None  # None -> the RAG service falls back to its configured retrieval.default_k
     mode: str = "dense"  # dense | hybrid
     filters: dict | None = None
     rerank: bool = False

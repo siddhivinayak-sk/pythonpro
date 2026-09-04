@@ -397,7 +397,7 @@ Contracts are versioned (`/v1`) and published as OpenAPI/JSON-schema so services
 | Front end | React + Vite + TypeScript (**confirmed**) | Full control over the custom UX (auth, workflows, tool/RAG selection, vision) |
 | Providers | `langchain-openai`, `langchain-aws`, `langchain-ollama` | OpenAI, Azure OpenAI, Bedrock, Ollama (`langchain-openai` serves both OpenAI and Azure) |
 | Vector DB | **pgvector (default)**; Milvus, Qdrant, Chroma (pluggable) | ACID + one DB by default; scale up to Milvus/Qdrant when needed |
-| Embeddings | HuggingFace/sentence-transformers, Ollama (pluggable) | Open, configurable dims |
+| Embeddings | HuggingFace/sentence-transformers, Ollama, OpenAI, Azure OpenAI, Bedrock, PostgresML (pluggable) | Open, configurable dims; local, cloud-API, or in-database |
 | Doc parsing | Docling (default), PyMuPDF/unstructured (fallbacks) | Multi-format, OCR, CPU-friendly |
 | App DB | SQLite (default) / DuckDB (configurable) via SQLAlchemy | Lightweight, embeddable |
 | Scheduler | APScheduler (cron expressions) | In-process cron indexing |

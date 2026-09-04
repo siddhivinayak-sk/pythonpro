@@ -119,6 +119,7 @@ class ChatStore:
             if conv is None or conv.user_id != user_id:
                 return False
             s.execute(delete(Message).where(Message.conversation_id == conversation_id))
+            s.execute(delete(ContextFile).where(ContextFile.conversation_id == conversation_id))
             s.delete(conv)
             s.commit()
             return True
@@ -245,6 +246,7 @@ class ChatStore:
             wf = s.get(Workflow, workflow_id)
             if wf is None or wf.user_id != user_id:
                 return False
+            s.execute(delete(WorkflowRun).where(WorkflowRun.workflow_id == workflow_id))
             s.delete(wf)
             s.commit()
             return True

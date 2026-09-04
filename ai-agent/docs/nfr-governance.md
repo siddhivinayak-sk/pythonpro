@@ -51,8 +51,8 @@ Status: ✅ implemented & tested · 🟡 designed, partially built · ⬜ design
 
 | Req | Requirement | Design | Status |
 |-----|-------------|--------|--------|
-| RAG-1 | Multiple vector DBs (Milvus, PGVector, other OSS) | rag.md §3 | ✅ pgvector/memory; 🟡 chroma; ⬜ qdrant/milvus |
-| RAG-2 | Configurable OSS embedding model + dimension | rag.md §4 | ✅ |
+| RAG-1 | Multiple vector DBs (Milvus, PGVector, other OSS) | rag.md §3 | ✅ memory/pgvector/chroma/qdrant/milvus (lazy-imported; live backends integration-tested) |
+| RAG-2 | Configurable OSS embedding model + dimension | rag.md §4 | ✅ hashing/huggingface/ollama/openai/azure_openai/bedrock/postgresml + dimension validation |
 | RAG-3 | Configurable chunking strategies | rag.md §5 | ✅ (fixed/recursive/sentence/markdown) |
 | RAG-4 | Many file types; scan directory when enabled | rag.md §6 | ✅ native+scan; 🟡 Docling (lazy extra) |
 | RAG-5 | Usable by the conversation app | rag.md §8; retrieval API | ✅ API ready; wiring in Phase 4 |

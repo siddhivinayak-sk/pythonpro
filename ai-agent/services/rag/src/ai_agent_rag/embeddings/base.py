@@ -30,7 +30,14 @@ def build_embedder(profile: EmbeddingProfile) -> Embedder:
 
         return HashingEmbedder(profile.id, dimension=profile.dimension, normalize=profile.normalize)
 
-    if profile.provider in ("huggingface", "ollama", "openai"):
+    if profile.provider in (
+        "huggingface",
+        "ollama",
+        "openai",
+        "azure_openai",
+        "bedrock",
+        "postgresml",
+    ):
         from .providers import build_provider_embedder
 
         return build_provider_embedder(profile)

@@ -1,7 +1,8 @@
 """Vector store protocol + factory.
 
 ``memory`` is always available (tests/dev). ``pgvector`` is the production default. ``chroma`` is an
-embedded option. Qdrant/Milvus are reserved for later (see docs/subprojects/rag.md §3.2).
+embedded option. ``qdrant`` and ``milvus`` are supported via their client SDKs (lazy-imported). Backend
+SDKs are only required when the corresponding backend is actually used.
 """
 
 from __future__ import annotations
@@ -43,6 +44,12 @@ def build_vector_store(config: VectorStoreConfig) -> VectorStore:
         from .chroma import ChromaVectorStore
 
         return ChromaVectorStore(config.chroma.path)
-    if backend in ("qdrant", "milvus"):
-        raise NotImplementedError(f"vector store backend '{backend}' is reserved for a later phase")
+    if backend == "qdrant":
+        from .qdrant import QdrantVectorStore
+
+        return QdrantVectorStore(config.qdrant)
+    if backend == "milvus":
+        from .milvus import MilvusVectorStore
+
+        return MilvusVectorStore(config.milvus)
     raise ValueError(f"unknown vector store backend '{backend}'")

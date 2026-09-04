@@ -17,10 +17,61 @@ from ..embeddings import Vector
 from ..models import Chunk, RetrievedHit
 
 _SAFE_NAME = re.compile(r"[^a-zA-Z0-9_]")
+_SAFE_KEY = re.compile(r"^[a-zA-Z0-9_]+$")
+
+# distance -> (HNSW ops class, distance operator). ORDER BY <op> ASC yields nearest neighbours.
+_DISTANCE_OPS: dict[str, tuple[str, str]] = {
+    "cosine": ("vector_cosine_ops", "<=>"),
+    "l2": ("vector_l2_ops", "<->"),
+    "ip": ("vector_ip_ops", "<#>"),
+}
 
 
 def _table(collection: str) -> str:
     return "rag_" + _SAFE_NAME.sub("_", collection).lower()
+
+
+def _score_expr(distance: str, op: str) -> str:
+    # Higher score = more similar. Cosine distance -> 1 - d; L2/IP -> negate so nearer ranks higher
+    # (pgvector's <#> already returns the negative inner product).
+    if distance == "cosine":
+        return f"1 - (embedding {op} %s)"
+    return f"-(embedding {op} %s)"
+
+
+def _filter_conditions(filters: dict[str, Any] | None) -> tuple[list[str], list[Any]]:
+    """Build JSONB-metadata SQL condition fragments + bound params (injection-safe).
+
+    Supports ``{field: value}`` and ``{field: {"$eq": value}}`` equality plus ``{field: {"$contains": s}}``
+    (case-insensitive substring), matching the semantics of the in-memory store. Shared by the pgvector
+    store and the pgfts sparse retriever so both filter identically.
+    """
+    clauses: list[str] = []
+    params: list[Any] = []
+    if not filters:
+        return clauses, params
+    for key, condition in filters.items():
+        if not _SAFE_KEY.match(str(key)):
+            continue  # ignore keys that aren't plain identifiers
+        if isinstance(condition, dict):
+            if "$contains" in condition:
+                clauses.append("metadata->>%s ILIKE %s")
+                params.extend([key, f"%{condition['$contains']}%"])
+            elif "$eq" in condition:
+                clauses.append("metadata->>%s = %s")
+                params.extend([key, str(condition["$eq"])])
+        else:
+            clauses.append("metadata->>%s = %s")
+            params.extend([key, str(condition)])
+    return clauses, params
+
+
+def _build_where(filters: dict[str, Any] | None) -> tuple[str, list[Any]]:
+    """JSONB-metadata WHERE clause (with leading ``WHERE``) + params, or ``("", [])`` when empty."""
+    clauses, params = _filter_conditions(filters)
+    if not clauses:
+        return "", []
+    return " WHERE " + " AND ".join(clauses), params
 
 
 def _normalize_dsn(dsn: str) -> str:
@@ -35,6 +86,7 @@ class PgVectorStore:
         if not dsn:
             raise ValueError("pgvector backend requires a DSN (vector_store.pgvector.dsn)")
         self._dsn = _normalize_dsn(dsn)
+        self._distances: dict[str, str] = {}  # collection -> distance metric (for query operator)
 
     def _connect(self):
         import psycopg
@@ -47,16 +99,20 @@ class PgVectorStore:
 
     def ensure_collection(self, name: str, dimension: int, distance: str = "cosine") -> None:
         table = _table(name)
+        ops_class, _ = _DISTANCE_OPS.get(distance, _DISTANCE_OPS["cosine"])
+        self._distances[name] = distance if distance in _DISTANCE_OPS else "cosine"
+        # `dimension` is a type modifier (typmod), which cannot be a bound parameter, so it is
+        # interpolated as a validated integer.
+        dim = int(dimension)
         with self._connect() as conn:
             conn.execute(
                 f"CREATE TABLE IF NOT EXISTS {table} ("
                 "id TEXT PRIMARY KEY, source_id TEXT, path TEXT, content TEXT, "
-                "metadata JSONB, embedding vector(%s))",
-                (dimension,),
+                f"metadata JSONB, embedding vector({dim}))"
             )
             conn.execute(
                 f"CREATE INDEX IF NOT EXISTS {table}_embedding_idx "
-                f"ON {table} USING hnsw (embedding vector_cosine_ops)"
+                f"ON {table} USING hnsw (embedding {ops_class})"
             )
             conn.execute(f"CREATE INDEX IF NOT EXISTS {table}_source_idx ON {table} (source_id)")
 
@@ -84,13 +140,17 @@ class PgVectorStore:
         self, collection: str, query_vector: Vector, k: int, filters: dict[str, Any] | None = None
     ) -> list[RetrievedHit]:
         table = _table(collection)
-        # Cosine distance operator <=>; score = 1 - distance.
+        distance = self._distances.get(collection, "cosine")
+        _, op = _DISTANCE_OPS[distance]
+        score_expr = _score_expr(distance, op)
+        where_sql, where_params = _build_where(filters)
         sql = (
-            f"SELECT id, source_id, content, metadata, 1 - (embedding <=> %s) AS score "
-            f"FROM {table} ORDER BY embedding <=> %s LIMIT %s"
+            f"SELECT id, source_id, content, metadata, {score_expr} AS score "
+            f"FROM {table}{where_sql} ORDER BY embedding {op} %s LIMIT %s"
         )
+        params = [query_vector, *where_params, query_vector, k]
         with self._connect() as conn, conn.cursor() as cur:
-            cur.execute(sql, (query_vector, query_vector, k))
+            cur.execute(sql, params)
             rows = cur.fetchall()
         hits: list[RetrievedHit] = []
         for row in rows:

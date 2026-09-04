@@ -12,6 +12,8 @@ in-memory store + hashing embedder) so the service boots with no external depend
 
 from __future__ import annotations
 
+from typing import Any
+
 from ai_agent_core.config import BaseServiceSettings
 from pydantic import BaseModel, Field
 from pydantic_settings import SettingsConfigDict
@@ -20,13 +22,20 @@ from pydantic_settings import SettingsConfigDict
 # --- pipeline config (YAML) --------------------------------------------------
 class EmbeddingProfile(BaseModel):
     id: str
-    provider: str = "hashing"  # hashing | huggingface | ollama | openai
+    # hashing | huggingface | ollama | openai | azure_openai | bedrock | postgresml
+    provider: str = "hashing"
     model: str = "hashing-256"
     dimension: int = 256
     normalize: bool = True
     device: str = "cpu"
     batch_size: int = 32
-    base_url: str | None = None  # ollama / openai-compatible
+    base_url: str | None = None  # ollama / openai-compatible gateway / Azure OpenAI endpoint
+    api_key: str | None = None  # openai / azure_openai (supports ${ENV} expansion via load_config)
+    api_version: str | None = None  # azure_openai REST API version (e.g. "2024-10-21")
+    region: str | None = None  # bedrock region
+    auth_profile: str | None = None  # bedrock/AWS named profile
+    dsn: str | None = None  # postgresml Postgres connection string
+    extra: dict[str, Any] = Field(default_factory=dict)  # passthrough kwargs to the model factory
 
 
 class ChunkerProfile(BaseModel):
@@ -84,15 +93,39 @@ class ChromaConfig(BaseModel):
     path: str | None = None
 
 
+class QdrantConfig(BaseModel):
+    url: str | None = None  # e.g. http://qdrant:6333 (server mode)
+    api_key: str | None = None  # Qdrant Cloud / secured instances
+    path: str | None = None  # local embedded on-disk store (alternative to url)
+    prefer_grpc: bool = False
+
+
+class MilvusConfig(BaseModel):
+    uri: str | None = None  # e.g. http://milvus:19530 or a Zilliz Cloud endpoint
+    token: str | None = None  # user:password or an API key
+    db_name: str | None = None
+
+
 class VectorStoreConfig(BaseModel):
     backend: str = "pgvector"  # memory | chroma | pgvector | qdrant | milvus
     pgvector: PgVectorConfig = Field(default_factory=PgVectorConfig)
     chroma: ChromaConfig = Field(default_factory=ChromaConfig)
+    qdrant: QdrantConfig = Field(default_factory=QdrantConfig)
+    milvus: MilvusConfig = Field(default_factory=MilvusConfig)
 
 
 class RetrievalConfig(BaseModel):
     default_k: int = 6
+    candidates: int = 20  # candidate-pool size fetched per arm for hybrid fusion / reranking
+    # Sparse (lexical) backend for hybrid search: "bm25" (in-process, dep-free) or "pgfts" (persistent,
+    # PostgreSQL full-text search reusing the pgvector DSN).
+    sparse_backend: str = "bm25"
+    sparse_language: str = "english"  # pgfts text-search configuration
     rerank_enabled: bool = False
+    rerank_model: str | None = (
+        None  # cross-encoder model (e.g. BAAI/bge-reranker-base); None -> Noop
+    )
+    rerank_device: str = "cpu"
 
 
 class RagConfig(BaseModel):
@@ -146,6 +179,14 @@ class RagSettings(BaseServiceSettings):
     # Fallback vector store used only when no config_file is provided.
     vector_store_backend: str = "memory"
     pgvector_dsn: str | None = None
+
+    # Enable Docling loaders (PDF/Office/images w/ OCR). Requires the `ingestion` extra; off by default so
+    # the base install stays light. When off, unsupported extensions are skipped at scan time.
+    enable_docling: bool = False
+
+    # Run the APScheduler cron indexer in-process for configured indexer.jobs. Enable on the indexer
+    # worker; disable on API-only replicas so jobs don't run on every instance.
+    enable_scheduler: bool = True
 
     # Hardening: per-client requests/minute (0 disables). Health + /metrics are exempt.
     rate_limit_per_minute: int = 0

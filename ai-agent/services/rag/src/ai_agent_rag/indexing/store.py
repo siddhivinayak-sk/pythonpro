@@ -6,6 +6,7 @@ Uses stdlib ``sqlite3``. Holds no secrets. Path is configurable; ``:memory:`` is
 from __future__ import annotations
 
 import sqlite3
+import threading
 import time
 from dataclasses import dataclass
 
@@ -50,15 +51,20 @@ class FileRecord:
 
 class IndexStore:
     def __init__(self, path: str = ":memory:") -> None:
+        # Shared connection (check_same_thread=False) accessed by both the API and the background
+        # scheduler thread, so all access is serialised through a lock.
         self._conn = sqlite3.connect(path, check_same_thread=False)
         self._conn.row_factory = sqlite3.Row
+        self._lock = threading.Lock()
         self._conn.executescript(_SCHEMA)
 
     # -- files --
     def get_file(self, collection: str, source_id: str) -> FileRecord | None:
-        row = self._conn.execute(
-            "SELECT * FROM files WHERE collection = ? AND source_id = ?", (collection, source_id)
-        ).fetchone()
+        with self._lock:
+            row = self._conn.execute(
+                "SELECT * FROM files WHERE collection = ? AND source_id = ?",
+                (collection, source_id),
+            ).fetchone()
         if row is None:
             return None
         return FileRecord(
@@ -81,26 +87,29 @@ class IndexStore:
         mtime: float,
         status: str = "indexed",
     ) -> None:
-        self._conn.execute(
-            "INSERT INTO files (collection, source_id, path, content_hash, size, mtime, status, last_indexed_at) "
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?) "
-            "ON CONFLICT (collection, source_id) DO UPDATE SET path=excluded.path, "
-            "content_hash=excluded.content_hash, size=excluded.size, mtime=excluded.mtime, "
-            "status=excluded.status, last_indexed_at=excluded.last_indexed_at",
-            (collection, source_id, path, content_hash, size, mtime, status, time.time()),
-        )
-        self._conn.commit()
+        with self._lock:
+            self._conn.execute(
+                "INSERT INTO files (collection, source_id, path, content_hash, size, mtime, status, last_indexed_at) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?) "
+                "ON CONFLICT (collection, source_id) DO UPDATE SET path=excluded.path, "
+                "content_hash=excluded.content_hash, size=excluded.size, mtime=excluded.mtime, "
+                "status=excluded.status, last_indexed_at=excluded.last_indexed_at",
+                (collection, source_id, path, content_hash, size, mtime, status, time.time()),
+            )
+            self._conn.commit()
 
     def delete_file(self, collection: str, source_id: str) -> None:
-        self._conn.execute(
-            "DELETE FROM files WHERE collection = ? AND source_id = ?", (collection, source_id)
-        )
-        self._conn.commit()
+        with self._lock:
+            self._conn.execute(
+                "DELETE FROM files WHERE collection = ? AND source_id = ?", (collection, source_id)
+            )
+            self._conn.commit()
 
     def list_source_ids(self, collection: str) -> set[str]:
-        rows = self._conn.execute(
-            "SELECT source_id FROM files WHERE collection = ?", (collection,)
-        ).fetchall()
+        with self._lock:
+            rows = self._conn.execute(
+                "SELECT source_id FROM files WHERE collection = ?", (collection,)
+            ).fetchall()
         return {row["source_id"] for row in rows}
 
     # -- runs --
@@ -117,30 +126,34 @@ class IndexStore:
         vectors_upserted: int,
         status: str = "completed",
     ) -> int:
-        cur = self._conn.execute(
-            "INSERT INTO index_runs (collection, mode, started_at, finished_at, scanned, changed, "
-            "deleted, failed, vectors_upserted, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            (
-                collection,
-                mode,
-                started_at,
-                time.time(),
-                scanned,
-                changed,
-                deleted,
-                failed,
-                vectors_upserted,
-                status,
-            ),
-        )
-        self._conn.commit()
-        return int(cur.lastrowid or 0)
+        with self._lock:
+            cur = self._conn.execute(
+                "INSERT INTO index_runs (collection, mode, started_at, finished_at, scanned, changed, "
+                "deleted, failed, vectors_upserted, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    collection,
+                    mode,
+                    started_at,
+                    time.time(),
+                    scanned,
+                    changed,
+                    deleted,
+                    failed,
+                    vectors_upserted,
+                    status,
+                ),
+            )
+            self._conn.commit()
+            return int(cur.lastrowid or 0)
 
     def last_run(self, collection: str) -> dict | None:
-        row = self._conn.execute(
-            "SELECT * FROM index_runs WHERE collection = ? ORDER BY id DESC LIMIT 1", (collection,)
-        ).fetchone()
+        with self._lock:
+            row = self._conn.execute(
+                "SELECT * FROM index_runs WHERE collection = ? ORDER BY id DESC LIMIT 1",
+                (collection,),
+            ).fetchone()
         return dict(row) if row else None
 
     def close(self) -> None:
-        self._conn.close()
+        with self._lock:
+            self._conn.close()

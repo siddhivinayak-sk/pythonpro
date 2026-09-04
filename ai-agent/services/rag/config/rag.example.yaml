@@ -1,25 +1,62 @@
-# Example RAG configuration (Phase 2 consumes the full shape below).
+# Example RAG configuration (the pipeline shape consumed by RagConfig).
 # See docs/subprojects/rag.md §10 for the complete reference.
-service:
-  host: 0.0.0.0
-  port: 8081
-
-index_metadata_db:
-  engine: sqlite
-  path: /data/rag/index.db
+#
+# NOTE: service host/port and the index-metadata DB path are NOT set here — they come from the
+# RagSettings environment variables (RAG_HOST, RAG_PORT, RAG_INDEX_DB_PATH) and any keys placed under a
+# `service:` / `index_metadata_db:` block in this file would be ignored.
 
 vector_store:
-  backend: pgvector            # default; also: chroma | qdrant | milvus
+  backend: pgvector            # memory | pgvector | chroma | qdrant | milvus
   pgvector:
     dsn: ${RAG_PGVECTOR_DSN}
+  chroma:
+    path: /data/rag/chroma
+  qdrant:
+    url: ${RAG_QDRANT_URL}     # e.g. http://qdrant:6333  (or set `path:` for local embedded)
+    api_key: ${RAG_QDRANT_API_KEY}
+  milvus:
+    uri: ${RAG_MILVUS_URI}     # e.g. http://milvus:19530 (or a Zilliz Cloud endpoint)
+    token: ${RAG_MILVUS_TOKEN}
 
 embeddings:
+  # The embedding *model* provider is independent of the vector store above.
   profiles:
+    # -- local / self-hosted --------------------------------------------------
     - id: bge-m3-1024
-      provider: huggingface
+      provider: huggingface     # sentence-transformers (needs the embeddings-hf extra)
       model: BAAI/bge-m3
       dimension: 1024
       normalize: true
+    # - id: nomic-ollama
+    #   provider: ollama
+    #   model: nomic-embed-text
+    #   dimension: 768
+    #   base_url: http://ollama:11434
+    # -- cloud / API ----------------------------------------------------------
+    # - id: openai-3-large
+    #   provider: openai         # needs the embeddings-openai extra
+    #   model: text-embedding-3-large
+    #   dimension: 3072
+    #   api_key: ${OPENAI_API_KEY}
+    # - id: azure-3-large
+    #   provider: azure_openai   # needs the embeddings-openai extra
+    #   model: text-embedding-3-large     # = your Azure *deployment* name
+    #   dimension: 3072
+    #   base_url: ${AZURE_OPENAI_ENDPOINT}
+    #   api_key: ${AZURE_OPENAI_API_KEY}
+    #   api_version: ${AZURE_OPENAI_API_VERSION}
+    # - id: titan-v2
+    #   provider: bedrock        # needs the embeddings-bedrock extra
+    #   model: amazon.titan-embed-text-v2:0
+    #   dimension: 1024
+    #   region: us-east-1
+    #   auth_profile: default
+    # -- in-database (PostgresML) --------------------------------------------
+    # - id: pgml-e5
+    #   provider: postgresml     # embeddings computed in-DB via pgml.embed(); needs the postgresml extra
+    #   model: intfloat/e5-small-v2
+    #   dimension: 384
+    #   dsn: ${RAG_POSTGRESML_DSN}
 
 chunkers:
   profiles:
@@ -43,6 +80,20 @@ collections:
     chunker_ref: recursive-default
     hybrid: true
     sources: [handbook-dir]
+
+retrieval:
+  default_k: 6            # used when a /v1/retrieve request omits `k`
+  candidates: 20         # candidate pool fetched per arm for hybrid fusion / reranking
+  # Request `mode: hybrid` to fuse dense + sparse results with Reciprocal Rank Fusion.
+  # Sparse backend: "bm25" (in-process, dependency-free) or "pgfts" (persistent PostgreSQL full-text
+  # search reusing the pgvector DSN above — durable + multi-replica). Falls back to bm25 if no DSN.
+  sparse_backend: bm25
+  sparse_language: english
+  # Cross-encoder reranking (needs the `rerank` / `embeddings-hf` extra). Leave rerank_model unset to
+  # disable (no-op). Requests can also opt in per-call with {"rerank": true}.
+  rerank_enabled: false
+  rerank_model: null     # e.g. BAAI/bge-reranker-base
+  rerank_device: cpu
 
 indexer:
   timezone: UTC

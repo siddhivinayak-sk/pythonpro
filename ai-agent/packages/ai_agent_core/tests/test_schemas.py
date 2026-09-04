@@ -7,7 +7,7 @@ from ai_agent_core.schemas import Citation, HealthStatus, Hit, ModelInfo, Retrie
 
 def test_retrieve_request_defaults() -> None:
     req = RetrieveRequest(collection="handbook", query="leave policy?")
-    assert req.k == 6
+    assert req.k is None  # service falls back to retrieval.default_k
     assert req.mode == "dense"
     assert req.rerank is False
 

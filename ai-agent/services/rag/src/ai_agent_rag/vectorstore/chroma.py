@@ -18,12 +18,15 @@ class ChromaVectorStore:
 
         self._client = chromadb.PersistentClient(path=path) if path else chromadb.EphemeralClient()
         self._dims: dict[str, int] = {}
+        self._spaces: dict[str, str] = {}  # collection -> hnsw space (cosine|l2|ip)
 
     def _collection(self, name: str):
-        return self._client.get_or_create_collection(name=name, metadata={"hnsw:space": "cosine"})
+        space = self._spaces.get(name, "cosine")
+        return self._client.get_or_create_collection(name=name, metadata={"hnsw:space": space})
 
     def ensure_collection(self, name: str, dimension: int, distance: str = "cosine") -> None:
         self._dims[name] = dimension
+        self._spaces[name] = distance if distance in ("cosine", "l2", "ip") else "cosine"
         self._collection(name)
 
     def upsert(self, collection: str, chunks: list[Chunk], vectors: list[Vector]) -> None:
@@ -50,11 +53,14 @@ class ChromaVectorStore:
         docs = result.get("documents", [[]])[0]
         metas = result.get("metadatas", [[]])[0]
         distances = result.get("distances", [[]])[0]
+        space = self._spaces.get(collection, "cosine")
         for cid, doc, meta, dist in zip(ids, docs, metas, distances, strict=False):
+            # cosine distance -> similarity; l2/ip -> negate distance (monotonic, higher = closer)
+            score = 1.0 - float(dist) if space == "cosine" else -float(dist)
             hits.append(
                 RetrievedHit(
                     text=doc,
-                    score=1.0 - float(dist),  # cosine distance -> similarity
+                    score=score,
                     chunk_id=cid,
                     source_id=(meta or {}).get("source_id", ""),
                     metadata=meta or {},

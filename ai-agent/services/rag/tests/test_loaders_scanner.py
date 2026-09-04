@@ -65,3 +65,19 @@ def test_scan_directory_include_exclude_recursive(tmp_path: Path) -> None:
     assert not any("drafts" in i for i in ids)  # excluded
     # content hash is populated and stable
     assert all(f.content_hash for f in found)
+
+
+def test_scan_respects_non_recursive(tmp_path) -> None:
+    from ai_agent_rag.config import DirectorySource
+    from ai_agent_rag.indexing.scanner import scan_directory
+
+    (tmp_path / "top.txt").write_text("a", encoding="utf-8")
+    sub = tmp_path / "sub"
+    sub.mkdir()
+    (sub / "deep.txt").write_text("b", encoding="utf-8")
+
+    recursive = scan_directory(DirectorySource(id="s", path=str(tmp_path), recursive=True))
+    assert {f.path.name for f in recursive} == {"top.txt", "deep.txt"}
+
+    flat = scan_directory(DirectorySource(id="s", path=str(tmp_path), recursive=False))
+    assert {f.path.name for f in flat} == {"top.txt"}

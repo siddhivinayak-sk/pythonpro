@@ -9,6 +9,7 @@ import math
 from typing import Any
 
 from ..embeddings import Vector
+from ..filters import matches
 from ..models import Chunk, RetrievedHit
 
 
@@ -21,21 +22,13 @@ def _cosine(a: Vector, b: Vector) -> float:
     return dot / (na * nb)
 
 
-def _matches(metadata: dict[str, Any], filters: dict[str, Any] | None) -> bool:
-    if not filters:
-        return True
-    for key, condition in filters.items():
-        value = metadata.get(key)
-        if isinstance(condition, dict):
-            if "$contains" in condition and (
-                value is None or condition["$contains"] not in str(value)
-            ):
-                return False
-            if "$eq" in condition and value != condition["$eq"]:
-                return False
-        elif value != condition:
-            return False
-    return True
+def _score(a: Vector, b: Vector, distance: str) -> float:
+    """Similarity score (higher = closer) for the collection's configured distance metric."""
+    if distance == "l2":
+        return -math.sqrt(sum((x - y) ** 2 for x, y in zip(a, b, strict=False)))
+    if distance == "ip":
+        return sum(x * y for x, y in zip(a, b, strict=False))
+    return _cosine(a, b)
 
 
 class _Record:
@@ -89,10 +82,11 @@ class InMemoryVectorStore:
         if not coll:
             raise KeyError(f"collection '{collection}' does not exist")
         scored: list[RetrievedHit] = []
+        distance = coll.get("distance", "cosine")
         for rec in coll["records"].values():
-            if not _matches(rec.chunk.metadata, filters):
+            if not matches(rec.chunk.metadata, filters):
                 continue
-            score = _cosine(query_vector, rec.vector)
+            score = _score(query_vector, rec.vector, distance)
             scored.append(
                 RetrievedHit(
                     text=rec.chunk.text,
