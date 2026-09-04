@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ai-agent-core"
+version = "0.1.0"
+description = "Shared core for the AI-Agent Platform: LLM connection registry, config, telemetry, schemas."
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "structlog>=24.1",
+    "pyyaml>=6.0.1",
+    # Shared web hardening/observability middleware (ai_agent_core.web). Starlette ships with FastAPI
+    # in the services; prometheus-client is small. Imported only by web-facing consumers.
+    "starlette>=0.37",
+    "prometheus-client>=0.20",
+]
+
+[project.optional-dependencies]
+# LangChain is only needed when actually instantiating models; the registry/factory
+# import it lazily so the base package (and its tests) stay lightweight.
+llm = ["langchain>=0.3", "langchain-core>=0.3"]
+openai = ["langchain-openai>=0.2"]
+# Azure OpenAI is served by the same package as OpenAI (AzureChatOpenAI / AzureOpenAIEmbeddings).
+azure-openai = ["langchain-openai>=0.2"]
+bedrock = ["langchain-aws>=0.2"]
+ollama = ["langchain-ollama>=0.2"]
+all-providers = [
+    "langchain>=0.3",
+    "langchain-core>=0.3",
+    "langchain-openai>=0.2",
+    "langchain-aws>=0.2",
+    "langchain-ollama>=0.2",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ai_agent_core"]

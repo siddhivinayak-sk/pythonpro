@@ -1,0 +1,49 @@
+# LLM connection registry — demonstrates MULTIPLE connections across providers.
+# Every chat-capable model below appears in the UI model picker at runtime.
+# Point the service at this file with CHAT_LLM_CONFIG_FILE=/path/to/llm.yaml
+default_connection: ollama-local
+
+connections:
+  - id: openai-prod
+    provider: openai
+    api_key: ${OPENAI_API_KEY}
+    models:
+      - name: gpt-4o
+        display_name: "GPT-4o (vision)"
+        capabilities: [chat, vision, tools]
+      - name: text-embedding-3-large
+        capabilities: [embeddings]
+        dimensions: 3072
+
+  - id: azure-openai
+    provider: azure_openai
+    base_url: ${AZURE_OPENAI_ENDPOINT}       # https://<resource>.openai.azure.com/
+    api_key: ${AZURE_OPENAI_API_KEY}
+    api_version: ${AZURE_OPENAI_API_VERSION} # e.g. 2024-10-21
+    # NOTE: each model `name` is the Azure *deployment* name. If your deployment name differs from the
+    # model, set it explicitly, e.g.  extra: { azure_deployment: my-gpt4o-deployment }
+    models:
+      - name: ${AZURE_OPENAI_DEPLOYMENT}
+        display_name: "GPT-4o (Azure)"
+        capabilities: [chat, vision, tools]
+      - name: text-embedding-3-large
+        display_name: "text-embedding-3-large (Azure)"
+        capabilities: [embeddings]
+        dimensions: 3072
+
+  - id: bedrock-use1
+    provider: bedrock
+    region: us-east-1
+    auth_profile: default
+    models:
+      - name: anthropic.claude-3-5-sonnet-20240620-v1:0
+        display_name: "Claude 3.5 Sonnet (Bedrock)"
+        capabilities: [chat, vision, tools]
+
+  - id: ollama-local
+    provider: ollama
+    base_url: http://ollama:11434
+    models:
+      - name: llama3.1
+        display_name: "Llama 3.1 (local)"
+        capabilities: [chat, tools]

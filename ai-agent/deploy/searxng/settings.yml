@@ -1,0 +1,14 @@
+# Minimal SearXNG config enabling the JSON API the MCP server uses.
+# For production, change secret_key and review the upstream engine list.
+use_default_settings: true
+
+server:
+  secret_key: "change-me-in-production"
+  limiter: false
+  image_proxy: true
+
+search:
+  formats:
+    - html
+    - json
+  safe_search: 1

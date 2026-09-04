@@ -1,0 +1,50 @@
+# CI for the AI-Agent Platform: lint, type-check, tests, and the front-end build.
+#
+# NOTE: GitHub runs workflows from the repository root's .github/workflows. This file assumes the
+# `ai-agent` project is the repo root. If it is nested under a parent repo, move this file to the repo
+# root's .github/workflows and add `working-directory: ai-agent` (and `ai-agent/services/chat/frontend`)
+# to the job steps.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.13"
+      - name: Sync workspace
+        run: uv sync --all-packages
+      - name: Lint (ruff)
+        run: uv run ruff check .
+      - name: Format check (ruff)
+        run: uv run ruff format --check .
+      - name: Type-check (mypy)
+        run: uv run mypy packages/ai_agent_core/src services/rag/src services/chat/src services/mcp-web-search/src services/evaluation/src
+      - name: Tests
+        run: uv run pytest -q
+      - name: Evaluation gate (RAG)
+        working-directory: services/evaluation
+        run: uv run --package ai-agent-evaluation python -m ai_agent_eval run --suite rag
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/chat/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install
+        run: npm install
+      - name: Build (type-check + bundle)
+        run: npm run build

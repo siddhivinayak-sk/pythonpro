@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ai-agent-chat"
+version = "0.1.0"
+description = "Conversation backend: auth, chat agent, history, settings, model switching, vision, workflows."
+requires-python = ">=3.12"
+dependencies = [
+    # Pull the full provider set (langchain + langchain-openai/-aws/-ollama) so switching
+    # LLM providers is a config-only change (no image rebuild). See config/llm.example.yaml.
+    "ai-agent-core[all-providers]",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "httpx>=0.27",
+    "sqlalchemy>=2.0",
+    "langchain-core>=0.3",
+    "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+# Tool-agent runtime: LangChain models for native tool-calling + the MCP client for web-search tools.
+agent = ["langchain>=0.3", "langgraph>=0.2", "langchain-mcp-adapters>=0.1", "mcp>=1.2"]
+# DuckDB backend for the app DB:
+duckdb = ["duckdb-engine>=0.13"]
+# OIDC / Keycloak token validation:
+auth = ["python-jose[cryptography]>=3.3", "authlib>=1.3", "python-keycloak>=4.0"]
+# DB migrations:
+migrations = ["alembic>=1.13"]
+
+[project.scripts]
+ai-agent-chat = "ai_agent_chat.app:main"
+
+[tool.uv.sources]
+ai-agent-core = { workspace = true }
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ai_agent_chat"]

@@ -1,0 +1,52 @@
+# Example RAG configuration (Phase 2 consumes the full shape below).
+# See docs/subprojects/rag.md §10 for the complete reference.
+service:
+  host: 0.0.0.0
+  port: 8081
+
+index_metadata_db:
+  engine: sqlite
+  path: /data/rag/index.db
+
+vector_store:
+  backend: pgvector            # default; also: chroma | qdrant | milvus
+  pgvector:
+    dsn: ${RAG_PGVECTOR_DSN}
+
+embeddings:
+  profiles:
+    - id: bge-m3-1024
+      provider: huggingface
+      model: BAAI/bge-m3
+      dimension: 1024
+      normalize: true
+
+chunkers:
+  profiles:
+    - id: recursive-default
+      strategy: recursive
+      target_tokens: 512
+      overlap_tokens: 0
+
+sources:
+  - id: handbook-dir
+    type: directory
+    path: /data/rag/handbook
+    recursive: true
+    include: ["**/*.pdf", "**/*.md", "**/*.html", "**/*.docx", "**/*.png"]
+
+collections:
+  - name: company-handbook
+    embedding_ref: bge-m3-1024
+    dimension: 1024
+    distance: cosine
+    chunker_ref: recursive-default
+    hybrid: true
+    sources: [handbook-dir]
+
+indexer:
+  timezone: UTC
+  jobs:
+    - collection: company-handbook
+      cron: "0 2 * * *"
+      mode: incremental

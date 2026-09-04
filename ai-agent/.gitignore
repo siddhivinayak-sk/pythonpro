@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.uv/
+uv.lock
+
+# Test / coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Node / frontend
+node_modules/
+services/chat/frontend/dist/
+services/chat/frontend/.vite/
+
+# Local data & secrets
+/data/
+# Evaluation reports (generated)
+**/reports/
+*.db
+*.sqlite
+*.sqlite3
+.env
+!*.env.example
+deploy/env/*.env
+!deploy/env/*.env.example
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.log

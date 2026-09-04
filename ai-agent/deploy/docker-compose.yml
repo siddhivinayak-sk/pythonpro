@@ -1,0 +1,202 @@
+# AI-Agent Platform — root orchestrator.
+# Each sub-project is isolated behind a Compose profile so you run only what you need:
+#   docker compose --profile mcp up                 # MCP web search + SearXNG
+#   docker compose --profile rag up                 # RAG API + indexer + pgvector
+#   docker compose --profile chat up                # chat backend + frontend
+#   docker compose --profile eval run --rm evaluation-runner run --suite rag
+#   docker compose --profile all up                 # everything
+#
+# Copy .env.example -> .env and adjust secrets before running.
+name: ai-agent
+
+# ---- reusable env fragments -------------------------------------------------
+x-common-env: &common-env
+  LOG_LEVEL: ${LOG_LEVEL:-INFO}
+  LOG_JSON: ${LOG_JSON:-true}
+
+services:
+  # ---- Conversation front end (sub-project 2) -------------------------------
+  chat-frontend:
+    build:
+      context: ../services/chat/frontend
+      dockerfile: Dockerfile
+    profiles: ["chat", "all"]
+    ports: ["3000:80"]
+    depends_on: [chat-api]
+    restart: unless-stopped
+
+  chat-api:
+    build:
+      context: ..
+      dockerfile: services/chat/Dockerfile
+    profiles: ["chat", "all"]
+    ports: ["8080:8080"]
+    env_file:
+     - .env
+    environment:
+      <<: *common-env
+      CHAT_LLM_CONFIG_FILE: /app/services/chat/config/llm.example.yaml
+      CHAT_RAG_API_BASE_URL: http://rag-api:8081
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY:-}
+      AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT:-}
+      AZURE_OPENAI_API_VERSION: ${AZURE_OPENAI_API_VERSION:-2024-10-21}
+      AWS_REGION: ${AWS_REGION:-us-east-1}
+    volumes: ["chatdata:/data/chat"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c \"import urllib.request; urllib.request.urlopen('http://localhost:8080/healthz')\""]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+  # ---- RAG application (sub-project 1) --------------------------------------
+  rag-api:
+    build:
+      context: ..
+      dockerfile: services/rag/Dockerfile
+    profiles: ["rag", "all"]
+    ports: ["8081:8081"]
+    environment:
+      <<: *common-env
+      RAG_VECTOR_STORE_BACKEND: pgvector
+      RAG_PGVECTOR_DSN: postgresql+psycopg://${PG_USER:-ai}:${PG_PASSWORD:-ai}@pgvector:5432/${PG_DB:-rag}
+    volumes: ["ragdata:/data/rag"]
+    depends_on: [pgvector]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c \"import urllib.request; urllib.request.urlopen('http://localhost:8081/healthz')\""]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+  rag-indexer:
+    build:
+      context: ..
+      dockerfile: services/rag/Dockerfile
+    profiles: ["rag", "all"]
+    environment:
+      <<: *common-env
+      RAG_VECTOR_STORE_BACKEND: pgvector
+      RAG_PGVECTOR_DSN: postgresql+psycopg://${PG_USER:-ai}:${PG_PASSWORD:-ai}@pgvector:5432/${PG_DB:-rag}
+    volumes: ["ragdata:/data/rag"]
+    depends_on: [pgvector]
+    # Phase 2 replaces this with the APScheduler-based cron indexer (see docs/subprojects/rag.md §7).
+    command: ["python3", "-c", "print('rag-indexer skeleton — cron indexing lands in Phase 2', flush=True)"]
+    restart: "no"
+
+  # ---- MCP web-search server (sub-project 3) --------------------------------
+  mcp-web-search:
+    build:
+      context: ..
+      dockerfile: services/mcp-web-search/Dockerfile
+    profiles: ["mcp", "all"]
+    ports: ["8090:8090"]
+    environment:
+      <<: *common-env
+      MCP_SEARXNG_BASE_URL: http://searxng:8080
+    depends_on: [searxng]
+    restart: unless-stopped
+
+  searxng:
+    image: searxng/searxng:latest
+    profiles: ["mcp", "all"]
+    ports: ["8088:8080"]
+    environment:
+      SEARXNG_BASE_URL: http://localhost:8088/
+    volumes: ["./searxng:/etc/searxng:ro"]
+    restart: unless-stopped
+
+  # ---- Evaluation suite (sub-project 4) -------------------------------------
+  evaluation-runner:
+    build:
+      context: ..
+      dockerfile: services/evaluation/Dockerfile
+    profiles: ["eval", "all"]
+    environment:
+      <<: *common-env
+      EVAL_RAG_API_BASE_URL: http://rag-api:8081
+      EVAL_CHAT_API_BASE_URL: http://chat-api:8080
+    # Run on demand: docker compose --profile eval run --rm evaluation-runner run --suite rag
+
+  # ---- Infrastructure -------------------------------------------------------
+  pgvector:
+    image: pgvector/pgvector:pg16
+    profiles: ["pgvector", "rag", "all"]
+    environment:
+      POSTGRES_USER: ${PG_USER:-ai}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-ai}
+      POSTGRES_DB: ${PG_DB:-rag}
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_USER:-ai} -d ${PG_DB:-rag}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ollama:
+    image: ollama/ollama:latest
+    profiles: ["ollama", "all"]
+    ports: ["11434:11434"]
+    volumes: ["ollama:/root/.ollama"]
+    restart: unless-stopped
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    profiles: ["keycloak", "all"]
+    command: ["start-dev"]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN:-admin}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin}
+    ports: ["8083:8080"]
+    restart: unless-stopped
+
+  # ---- Observability (Phase 6) ----------------------------------------------
+  prometheus:
+    image: prom/prometheus:latest
+    profiles: ["observability", "all"]
+    volumes: ["./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro"]
+    ports: ["9090:9090"]
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    profiles: ["observability", "all"]
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+    ports: ["3002:3000"]
+    depends_on: [prometheus]
+    volumes: ["grafana:/var/lib/grafana"]
+    restart: unless-stopped
+
+  langfuse-db:
+    image: postgres:16-alpine
+    profiles: ["observability", "all"]
+    environment:
+      POSTGRES_USER: langfuse
+      POSTGRES_PASSWORD: ${LANGFUSE_DB_PASSWORD:-langfuse}
+      POSTGRES_DB: langfuse
+    volumes: ["langfusedb:/var/lib/postgresql/data"]
+    restart: unless-stopped
+
+  langfuse:
+    image: langfuse/langfuse:2
+    profiles: ["observability", "all"]
+    depends_on: [langfuse-db]
+    environment:
+      DATABASE_URL: postgresql://langfuse:${LANGFUSE_DB_PASSWORD:-langfuse}@langfuse-db:5432/langfuse
+      NEXTAUTH_URL: http://localhost:3001
+      NEXTAUTH_SECRET: ${LANGFUSE_NEXTAUTH_SECRET:-change-me}
+      SALT: ${LANGFUSE_SALT:-change-me}
+    ports: ["3001:3000"]
+    restart: unless-stopped
+
+volumes:
+  chatdata: {}
+  ragdata: {}
+  pgdata: {}
+  ollama: {}
+  grafana: {}
+  langfusedb: {}
