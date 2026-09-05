@@ -37,6 +37,9 @@ services:
       <<: *common-env
       CHAT_LLM_CONFIG_FILE: /app/services/chat/config/llm.example.yaml
       CHAT_RAG_API_BASE_URL: http://rag-api:8081
+      # MCP servers this deployment can use (JSON array). Surfaced in the UI's Tools picker.
+      # Requires the `mcp` profile so the mcp-web-search service is reachable on the compose network.
+      CHAT_MCP_SERVERS: '["http://mcp-web-search:8090/mcp"]'
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY:-}
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT:-}

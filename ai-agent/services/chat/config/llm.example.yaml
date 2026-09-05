@@ -1,7 +1,7 @@
 # LLM connection registry — demonstrates MULTIPLE connections across providers.
 # Every chat-capable model below appears in the UI model picker at runtime.
 # Point the service at this file with CHAT_LLM_CONFIG_FILE=/path/to/llm.yaml
-default_connection: ollama-local
+default_connection: azure-openai
 
 connections:
   - id: openai-prod
