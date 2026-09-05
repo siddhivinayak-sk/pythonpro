@@ -231,6 +231,15 @@ def create_app(
     # -- models --
     @app.get("/v1/models", response_model=list[ModelInfo], tags=["models"])
     def list_models(user=Depends(get_current_user)) -> list[ModelInfo]:
+        chat_models = registry.list_chat_models()
+        # The server default is the default connection's first chat-capable model — the same model
+        # get_chat_model() resolves when a request omits connection/model. Flag it so the UI can
+        # preselect it instead of guessing the first entry in the list.
+        default_conn = registry.default_connection_id()
+        default_ref: tuple[str, str] | None = next(
+            ((m.connection_id, m.model_name) for m in chat_models if m.connection_id == default_conn),
+            None,
+        )
         return [
             ModelInfo(
                 connection_id=m.connection_id,
@@ -240,8 +249,9 @@ def create_app(
                 capabilities=[c.value for c in m.capabilities],
                 dimensions=m.dimensions,
                 context_window=m.context_window,
+                is_default=(m.connection_id, m.model_name) == default_ref,
             )
-            for m in registry.list_chat_models()
+            for m in chat_models
         ]
 
     # -- conversations --

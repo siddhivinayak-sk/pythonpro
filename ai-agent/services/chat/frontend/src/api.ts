@@ -32,6 +32,7 @@ export interface ModelInfo {
   display_name: string;
   provider: string;
   capabilities: string[];
+  is_default?: boolean; // the server default model (used when a request omits connection/model)
 }
 export interface User {
   id: string;
@@ -163,13 +164,17 @@ export async function streamChat(id: string, body: ChatBody, onDelta: (t: string
       if (!line.startsWith("data:")) continue;
       const payload = line.slice(5).trim();
       if (payload === "[DONE]") return;
+      // Parse only inside try/catch (partial frames / keep-alives are ignored). Handling is done
+      // outside so a server-sent {"error": ...} event propagates to the caller instead of being
+      // swallowed as if it were an unparsable frame.
+      let obj: { delta?: string; error?: string } | null = null;
       try {
-        const obj = JSON.parse(payload) as { delta?: string; error?: string };
-        if (obj.error) throw new Error(obj.error);
-        if (obj.delta) onDelta(obj.delta);
+        obj = JSON.parse(payload);
       } catch {
-        /* ignore keep-alive / partial frames */
+        continue;
       }
+      if (obj?.error) throw new Error(obj.error);
+      if (obj?.delta) onDelta(obj.delta);
     }
   }
 }

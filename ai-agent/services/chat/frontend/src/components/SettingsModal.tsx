@@ -54,7 +54,7 @@ export function SettingsModal({
 
   function populate(data: ChatSettingsData, useModelFallback: boolean) {
     setTemperature(Number(data.temperature ?? 0.7));
-    setMemoryWindow(Number(data.memory_window ?? 10));
+    setMemoryWindow(Number(data.memory_window ?? 12));
     setMaxTokens(Number(data.max_tokens ?? 6553));
     setTopP(Number(data.top_p ?? 0.95));
     setStop((data.stop as string) ?? "");
@@ -135,6 +135,7 @@ export function SettingsModal({
 
   const ragOptions = Array.from(new Set([...availableCollections, ...ragSel]));
   const mcpOptions = Array.from(new Set([...availableServers, ...mcpSel]));
+  const defaultModel = models.find((m) => m.is_default);
 
   const overlay: CSSProperties = {
     position: "fixed",
@@ -226,7 +227,9 @@ export function SettingsModal({
           <>
             <label style={label}>Default model</label>
             <select style={field} value={modelRef} onChange={(e) => setModelRef(e.target.value)}>
-              <option value="">(server default)</option>
+              <option value="">
+                {defaultModel ? `(server default — ${defaultModel.display_name})` : "(server default)"}
+              </option>
               {models.map((m) => (
                 <option key={`${m.connection_id}::${m.model_name}`} value={`${m.connection_id}::${m.model_name}`}>
                   {m.display_name} — {m.connection_id}

@@ -25,6 +25,9 @@ class ModelInfo(BaseModel):
     capabilities: list[str] = Field(default_factory=list)
     dimensions: int | None = None
     context_window: int | None = None
+    # True for the model the server uses when a request specifies no connection/model
+    # (the default connection's first chat-capable model). Lets clients preselect it.
+    is_default: bool = False
 
 
 class Citation(BaseModel):

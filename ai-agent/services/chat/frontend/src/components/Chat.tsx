@@ -86,7 +86,8 @@ export function Chat({ user, onLogout }: { user: User; onLogout: () => void }) {
     refreshConversations();
   }, []);
 
-  // Pick the default model once models (and any saved preference) are available.
+  // Pick the default model once models (and any saved preference) are available. Precedence:
+  // saved account/conversation model → the server default (is_default) → first listed model.
   useEffect(() => {
     if (selectedRef || models.length === 0) return;
     const preferred =
@@ -94,8 +95,10 @@ export function Chat({ user, onLogout }: { user: User; onLogout: () => void }) {
         ? `${settings.connection_id}::${settings.model_name}`
         : "";
     const found = models.find((m) => `${m.connection_id}::${m.model_name}` === preferred);
-    const first = models[0];
-    setSelectedRef(found ? preferred : `${first.connection_id}::${first.model_name}`);
+    const serverDefault = models.find((m) => m.is_default) ?? models[0];
+    setSelectedRef(
+      found ? preferred : `${serverDefault.connection_id}::${serverDefault.model_name}`,
+    );
   }, [models, settings, selectedRef]);
 
   useEffect(() => {
