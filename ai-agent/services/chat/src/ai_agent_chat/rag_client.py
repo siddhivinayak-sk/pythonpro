@@ -12,7 +12,7 @@ class RetrievalClient(Protocol):
 
 
 class RagClient:
-    """Thin client over the RAG service's ``/v1/retrieve`` endpoint."""
+    """Thin client over the RAG service's ``/v1/retrieve`` and ``/v1/collections`` endpoints."""
 
     def __init__(self, base_url: str, timeout: int = 30) -> None:
         self.base_url = base_url.rstrip("/")
@@ -28,6 +28,17 @@ class RagClient:
         )
         resp.raise_for_status()
         return resp.json().get("hits", [])
+
+    def list_collections(self) -> list[str]:
+        """Return the RAG service's collection names (empty list if unreachable)."""
+        import httpx
+
+        try:
+            resp = httpx.get(f"{self.base_url}/v1/collections", timeout=self.timeout)
+            resp.raise_for_status()
+            return [c["name"] for c in resp.json().get("collections", []) if c.get("name")]
+        except Exception:  # noqa: BLE001 - discovery is best-effort; never break the UI
+            return []
 
 
 class RagRetrievalTool:

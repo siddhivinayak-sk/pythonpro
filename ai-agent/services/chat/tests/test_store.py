@@ -84,3 +84,14 @@ def test_delete_workflow_also_removes_runs() -> None:
     assert store.list_runs(wf["id"]) != []
     assert store.delete_workflow("u1", wf["id"]) is True
     assert store.list_runs(wf["id"]) == []  # no orphaned run rows
+
+
+def test_put_setting_merges_partial_updates() -> None:
+    store = _store()
+    store.put_setting("user", "u1", {"temperature": 0.2, "theme": "dark"})
+    store.put_setting("user", "u1", {"model_name": "gpt-4o", "connection_id": "azure-openai"})
+    got = store.get_setting("user", "u1")
+    assert got["temperature"] == 0.2  # preserved across the partial update
+    assert got["theme"] == "dark"  # preserved
+    assert got["model_name"] == "gpt-4o"  # added
+    assert got["connection_id"] == "azure-openai"

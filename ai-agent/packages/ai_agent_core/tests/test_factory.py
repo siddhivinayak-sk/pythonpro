@@ -97,6 +97,32 @@ def test_params_override_connection_kwargs() -> None:
     assert kwargs["temperature"] == 0.3
 
 
+def test_filter_generation_params_by_provider() -> None:
+    from ai_agent_core.llm.factory import _filter_generation_params
+
+    kwargs = {
+        "api_key": "k",
+        "temperature": 0.5,
+        "top_p": 0.9,
+        "max_tokens": 50,
+        "frequency_penalty": 0.1,
+        "presence_penalty": 0.1,
+        "stop": ["X"],
+    }
+    # OpenAI/Azure keep everything.
+    assert _filter_generation_params(Provider.OPENAI, dict(kwargs)) == kwargs
+    assert _filter_generation_params(Provider.AZURE_OPENAI, dict(kwargs)) == kwargs
+    # Ollama: drop max_tokens + penalties, keep temperature/top_p/stop and the connection kwarg.
+    ollama = _filter_generation_params(Provider.OLLAMA, dict(kwargs))
+    assert "frequency_penalty" not in ollama and "presence_penalty" not in ollama
+    assert "max_tokens" not in ollama
+    assert ollama["top_p"] == 0.9 and ollama["temperature"] == 0.5 and ollama["stop"] == ["X"]
+    assert ollama["api_key"] == "k"  # non-generation kwargs untouched
+    # Bedrock: keep max_tokens, drop penalties.
+    bedrock = _filter_generation_params(Provider.BEDROCK, dict(kwargs))
+    assert "max_tokens" in bedrock and "frequency_penalty" not in bedrock
+
+
 def test_embeddings_unsupported_provider_raises() -> None:
     # Force an unmapped provider value to exercise the guard.
     conn = _conn(provider=Provider.OLLAMA)

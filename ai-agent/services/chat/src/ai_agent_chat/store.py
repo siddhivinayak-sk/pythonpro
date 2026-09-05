@@ -194,17 +194,23 @@ class ChatStore:
             return json.loads(row.data) if row else {}
 
     def put_setting(self, scope: str, owner_id: str, data: dict[str, Any]) -> dict[str, Any]:
+        """Merge ``data`` into the scope's stored settings (PATCH semantics).
+
+        Merging lets partial updates (e.g. just the model from the header selector) coexist with other
+        overrides for the same scope instead of clobbering them.
+        """
         with self.db.session() as s:
             row = s.scalar(
                 select(Setting).where(Setting.scope == scope, Setting.owner_id == owner_id)
             )
+            merged = ({} if row is None or not row.data else json.loads(row.data)) | data
             if row is None:
-                row = Setting(scope=scope, owner_id=owner_id, data=json.dumps(data))
+                row = Setting(scope=scope, owner_id=owner_id, data=json.dumps(merged))
                 s.add(row)
             else:
-                row.data = json.dumps(data)
+                row.data = json.dumps(merged)
             s.commit()
-            return data
+            return merged
 
     def effective_settings(
         self, user_id: str, conversation_id: str | None = None

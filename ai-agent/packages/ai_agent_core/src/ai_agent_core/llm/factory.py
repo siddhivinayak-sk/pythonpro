@@ -27,6 +27,24 @@ _PROVIDER_TO_LANGCHAIN_EMBEDDINGS: dict[Provider, str] = {
     Provider.OLLAMA: "ollama",
 }
 
+# Generation parameters (beyond connection setup) and which providers accept them, so enabling an
+# OpenAI-style parameter (e.g. frequency_penalty) never reaches a backend that would reject it.
+_GENERATION_PARAMS: frozenset[str] = frozenset(
+    {"temperature", "top_p", "max_tokens", "frequency_penalty", "presence_penalty", "stop"}
+)
+_PROVIDER_GENERATION_SUPPORT: dict[Provider, frozenset[str]] = {
+    Provider.OPENAI: _GENERATION_PARAMS,
+    Provider.AZURE_OPENAI: _GENERATION_PARAMS,
+    Provider.BEDROCK: frozenset({"temperature", "top_p", "max_tokens", "stop"}),
+    Provider.OLLAMA: frozenset({"temperature", "top_p", "stop"}),
+}
+
+
+def _filter_generation_params(provider: Provider, kwargs: dict[str, Any]) -> dict[str, Any]:
+    """Drop generation kwargs the provider doesn't support; leave connection/passthrough kwargs intact."""
+    supported = _PROVIDER_GENERATION_SUPPORT.get(provider, _GENERATION_PARAMS)
+    return {k: v for k, v in kwargs.items() if k not in _GENERATION_PARAMS or k in supported}
+
 
 @runtime_checkable
 class ModelFactory(Protocol):
@@ -70,6 +88,7 @@ class LangChainModelFactory:
             # Azure keys off the *deployment* name; default it to the model name unless overridden.
             kwargs.setdefault("azure_deployment", model_name)
         kwargs.update(params)
+        kwargs = _filter_generation_params(connection.provider, kwargs)
         return provider, kwargs
 
     def _embeddings_args(

@@ -13,7 +13,7 @@ from typing import Any, Protocol
 
 from ai_agent_core import apply_callbacks, get_logger
 
-from .chat import _append_context, _content_to_text
+from .chat import _append_context, _content_to_text, build_model_params
 from .config import ChatSettings
 from .moderation import AllowAllModerationProvider, ModerationProvider
 from .store import ChatStore
@@ -127,8 +127,7 @@ class AgentOrchestrator:
         eff = self.store.effective_settings(user_id, conversation_id)
         conn = connection_id or eff.get("connection_id")
         model = model_name or eff.get("model_name")
-        temp = temperature if temperature is not None else eff.get("temperature")
-        params: dict[str, Any] = {"temperature": temp} if temp is not None else {}
+        params = build_model_params(eff, temperature=temperature)
 
         messages = self._base_messages(conversation_id, text, images, eff)
         self.store.add_message(conversation_id, "user", text)

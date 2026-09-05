@@ -90,10 +90,37 @@ export const sendChat = (id: string, body: ChatBody) =>
   req<Message>(`/v1/conversations/${id}/chat`, jsonInit("POST", body));
 
 // -- settings / uploads --
+export interface ChatSettingsData {
+  temperature?: number;
+  memory_window?: number; // "past messages included"
+  max_tokens?: number;
+  top_p?: number;
+  stop?: string | null;
+  frequency_penalty?: number;
+  presence_penalty?: number;
+  system_prompt?: string | null;
+  theme?: string; // light | dark | system
+  connection_id?: string | null;
+  model_name?: string | null;
+  rag_collections?: string[];
+  mcp_servers?: string[];
+  [key: string]: unknown;
+}
 export const getSettings = () =>
-  req<{ settings: Record<string, unknown> }>("/v1/settings").then((r) => r.settings);
-export const putSettings = (data: Record<string, unknown>) =>
-  req<{ settings: Record<string, unknown> }>("/v1/settings", jsonInit("PUT", { data }));
+  req<{ settings: ChatSettingsData }>("/v1/settings").then((r) => r.settings);
+export const putSettings = (data: ChatSettingsData) =>
+  req<{ settings: ChatSettingsData }>("/v1/settings", jsonInit("PUT", { data })).then((r) => r.settings);
+export const getConversationSettings = (convId: string) =>
+  req<{ settings: ChatSettingsData }>(`/v1/conversations/${convId}/settings`).then((r) => r.settings);
+export const putConversationSettings = (convId: string, data: ChatSettingsData) =>
+  req<{ settings: ChatSettingsData }>(`/v1/conversations/${convId}/settings`, jsonInit("PUT", { data })).then(
+    (r) => r.settings,
+  );
+
+// -- discovery (for the settings UI) --
+export const listRagCollections = () =>
+  req<{ collections: string[] }>("/v1/rag/collections").then((r) => r.collections);
+export const listMcpServers = () => req<{ servers: string[] }>("/v1/mcp/servers").then((r) => r.servers);
 
 export interface ContextFile {
   id: string;

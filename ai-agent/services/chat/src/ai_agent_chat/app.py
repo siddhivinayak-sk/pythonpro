@@ -370,6 +370,11 @@ def create_app(
         store.put_setting("user", user.id, body.data)
         return {"settings": store.effective_settings(user.id)}
 
+    @app.get("/v1/conversations/{conversation_id}/settings", tags=["settings"])
+    def get_conversation_settings(conversation_id: str, user=Depends(get_current_user)) -> dict:
+        _require_conversation(user, conversation_id)
+        return {"settings": store.effective_settings(user.id, conversation_id)}
+
     @app.put("/v1/conversations/{conversation_id}/settings", tags=["settings"])
     def put_conversation_settings(
         conversation_id: str, body: SettingsBody, user=Depends(get_current_user)
@@ -377,6 +382,17 @@ def create_app(
         _require_conversation(user, conversation_id)
         store.put_setting("conversation", conversation_id, body.data)
         return {"settings": store.effective_settings(user.id, conversation_id)}
+
+    # -- discovery (RAG collections + MCP servers, for the settings UI) --
+    @app.get("/v1/rag/collections", tags=["discovery"])
+    def list_rag_collections(user=Depends(get_current_user)) -> dict:
+        if not settings.rag_api_base_url:
+            return {"collections": []}
+        return {"collections": RagClient(settings.rag_api_base_url).list_collections()}
+
+    @app.get("/v1/mcp/servers", tags=["discovery"])
+    def list_mcp_servers(user=Depends(get_current_user)) -> dict:
+        return {"servers": settings.mcp_servers}
 
     # -- uploads (vision) --
     @app.post("/v1/uploads", tags=["uploads"])

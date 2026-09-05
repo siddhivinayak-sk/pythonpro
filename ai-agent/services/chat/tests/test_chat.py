@@ -102,3 +102,62 @@ def test_context_files_injected_into_prompt() -> None:
     sent = recorder[-1]
     joined = " ".join(str(getattr(m, "content", m)) for m in sent)
     assert "PARENTAL_LEAVE_DETAILS_MARKER" in joined
+
+
+def test_build_model_params_maps_generation_settings() -> None:
+    from ai_agent_chat.chat import build_model_params
+
+    eff = {
+        "temperature": 0.3,
+        "top_p": 0.9,
+        "max_tokens": 100,
+        "frequency_penalty": 0.5,
+        "presence_penalty": 0.2,
+        "stop": "END",
+    }
+    assert build_model_params(eff) == {
+        "temperature": 0.3,
+        "top_p": 0.9,
+        "max_tokens": 100,
+        "frequency_penalty": 0.5,
+        "presence_penalty": 0.2,
+        "stop": ["END"],  # a single stop string becomes a list
+    }
+
+
+def test_build_model_params_omits_unset_and_blank_stop() -> None:
+    from ai_agent_chat.chat import build_model_params
+
+    assert build_model_params({"temperature": None, "stop": "   "}) == {}
+
+
+def test_build_model_params_temperature_override_wins() -> None:
+    from ai_agent_chat.chat import build_model_params
+
+    assert build_model_params({"temperature": 0.7}, temperature=0.1)["temperature"] == 0.1
+
+
+def test_generation_settings_flow_from_conversation_to_model() -> None:
+    settings = ChatSettings(db_path=":memory:")
+    store = ChatStore(Database(settings), settings)
+    registry = build_registry(settings)
+    seen: list[dict] = []
+
+    class _M:
+        def invoke(self, messages):
+            return _Chunk("ok")
+
+        def stream(self, messages):
+            yield _Chunk("ok")
+
+    def provider(c, m, p):
+        seen.append(p)
+        return _M()
+
+    orch = ChatOrchestrator(registry, store, settings, model_provider=provider)
+    conv = store.create_conversation("u1")
+    store.put_setting("conversation", conv["id"], {"top_p": 0.9, "max_tokens": 50, "stop": "END"})
+    orch.complete(user_id="u1", conversation_id=conv["id"], text="hi")
+    assert seen[-1]["top_p"] == 0.9
+    assert seen[-1]["max_tokens"] == 50
+    assert seen[-1]["stop"] == ["END"]

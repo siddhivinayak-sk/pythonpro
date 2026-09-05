@@ -9,7 +9,9 @@ Backend (FastAPI) + `frontend/` (React + Vite + TS) for the chat experience. Ful
 > (llm/rag/tool steps). Also: **ad-hoc context files** attached to a conversation and injected as
 > reference data, **assistant image-output rendering**, and **audio STT/TTS endpoints** behind a
 > pluggable provider, plus **input/output moderation**, a **response cache** (exact/semantic), and
-> optional **Langfuse tracing** — all injectable and off by default. Backend: 64 tests; the React UI
+> optional **Langfuse tracing** — all injectable and off by default. The React UI renders assistant
+> **markdown**, has a **settings panel** (account + per-conversation) with RAG/MCP discovery, and
+> **light/dark/system** theming. Backend: 79 tests; the React UI
 > type-checks and builds. Streaming-with-tools emits
 > the grounded answer once; token-level streaming through tools and a full LangGraph multi-agent runtime
 > are future work.
@@ -21,7 +23,8 @@ Backend (FastAPI) + `frontend/` (React + Vite + TS) for the chat experience. Ful
 | **Auth** | Local admin (pbkdf2 + server-side sessions) and an OIDC/Keycloak verifier abstraction (JWKS validation, lazy `jose`); Bearer or `session` cookie. |
 | **Chat** | Streaming (SSE) and sync turns via an **injectable** chat model (LLM registry by default); memory windowing; per-message model/connection recorded. |
 | **History** | Conversations CRUD, auto-title, list ordered by activity, resume with full history. |
-| **Settings** | System < user < conversation precedence (temperature, memory window, system prompt, theme, model, RAG/MCP selections). |
+| **Settings** | System < user < conversation precedence. Generation params (temperature, top_p, max tokens, frequency/presence penalty, stop, past-messages-included), system prompt, theme, model, RAG/MCP selections. Editable from the **⚙ Settings** panel at either the **account** or **this-conversation** scope; RAG collections + MCP servers are chosen from discovered options. Params are applied to the model call and **filtered per provider** (unsupported keys are dropped, e.g. penalties on Ollama). |
+| **Frontend UX** | Assistant replies render **markdown** (headings, lists, code blocks, tables, links, images) safely (React elements, sanitized URLs); **light/dark/system** theme. |
 | **Model switching** | `/v1/models` lists all connections' chat models; switch mid-conversation. |
 | **Vision** | Image upload + owner-scoped serving; data-URI images passed to vision-capable models. Assistant image output (markdown, `data:` URI, or http image URLs) renders inline in the transcript. |
 | **Context files** | Attach a text file to a conversation; stored per-conversation and injected into the prompt as delimited, untrusted **reference data** (truncated to `context_char_cap`). |
@@ -63,7 +66,8 @@ npm run dev        # http://localhost:3000 (proxies /v1 -> http://localhost:8080
 | GET/POST | `/v1/conversations` (+ `PATCH`/`DELETE` `/{id}`) | history |
 | GET | `/v1/conversations/{id}/messages` | transcript |
 | POST | `/v1/conversations/{id}/chat` · `/chat/stream` | chat (sync / SSE) |
-| GET/PUT | `/v1/settings` · PUT `/v1/conversations/{id}/settings` | settings |
+| GET/PUT | `/v1/settings` · GET/PUT `/v1/conversations/{id}/settings` | settings (account + per-conversation) |
+| GET | `/v1/rag/collections` · `/v1/mcp/servers` | discovery for the settings UI |
 | POST/GET | `/v1/uploads` · `/v1/uploads/{id}` | vision images |
 | POST/GET/DELETE | `/v1/conversations/{id}/context` (+ `/{context_id}`) | ad-hoc context files |
 | POST | `/v1/audio/transcribe` · `/v1/audio/speech` | STT / TTS (pluggable provider) |

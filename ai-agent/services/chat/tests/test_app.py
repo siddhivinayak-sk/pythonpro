@@ -291,3 +291,59 @@ def test_audio_with_provider() -> None:
     s = client.post("/v1/audio/speech", json={"text": "hi", "voice": "x"})
     assert s.status_code == 200
     assert s.content == b"AUDIO"
+
+
+# --- discovery endpoints + per-conversation settings ------------------------------------------------
+def test_mcp_servers_endpoint_lists_configured() -> None:
+    settings = ChatSettings(
+        db_path=":memory:",
+        admin_username="admin",
+        admin_password="secret",
+        log_json=False,
+        mcp_servers=["http://mcp:8090"],
+    )
+    client = TestClient(create_app(settings, model_provider=lambda c, m, p: _FakeModel()))
+    _login(client)
+    assert client.get("/v1/mcp/servers").json()["servers"] == ["http://mcp:8090"]
+
+
+def test_rag_collections_empty_when_unconfigured() -> None:
+    client = _client()  # no rag_api_base_url
+    _login(client)
+    assert client.get("/v1/rag/collections").json()["collections"] == []
+
+
+def test_rag_collections_proxies_rag_service(monkeypatch) -> None:
+    from ai_agent_chat import rag_client
+
+    monkeypatch.setattr(
+        rag_client.RagClient, "list_collections", lambda self: ["handbook", "policies"]
+    )
+    settings = ChatSettings(
+        db_path=":memory:",
+        admin_username="admin",
+        admin_password="secret",
+        log_json=False,
+        rag_api_base_url="http://rag:8081",
+    )
+    client = TestClient(create_app(settings, model_provider=lambda c, m, p: _FakeModel()))
+    _login(client)
+    assert client.get("/v1/rag/collections").json()["collections"] == ["handbook", "policies"]
+
+
+def test_conversation_settings_get_put_and_ownership() -> None:
+    client = _client()
+    _login(client)
+    cid = client.post("/v1/conversations", json={}).json()["id"]
+
+    # defaults present before any override
+    before = client.get(f"/v1/conversations/{cid}/settings").json()["settings"]
+    assert "temperature" in before
+
+    # per-conversation override applies
+    put = client.put(f"/v1/conversations/{cid}/settings", json={"data": {"temperature": 0.1}})
+    assert put.status_code == 200
+    assert client.get(f"/v1/conversations/{cid}/settings").json()["settings"]["temperature"] == 0.1
+
+    # unknown conversation -> 404 (ownership/existence guard)
+    assert client.get("/v1/conversations/does-not-exist/settings").status_code == 404

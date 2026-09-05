@@ -48,6 +48,29 @@ def _append_context(messages: list, context_files: list, cap: int, system_messag
     )
 
 
+def build_model_params(eff: dict[str, Any], *, temperature: float | None = None) -> dict[str, Any]:
+    """Assemble model generation kwargs from a conversation's effective settings.
+
+    Only *set* values are included, so unset parameters fall back to the model/provider defaults. These
+    map to OpenAI/Azure chat parameters (temperature, top_p, max_tokens, frequency/presence penalties,
+    and stop); the model factory drops any a given provider doesn't support.
+    """
+    params: dict[str, Any] = {}
+    temp = temperature if temperature is not None else eff.get("temperature")
+    if temp is not None:
+        params["temperature"] = temp
+    for key in ("top_p", "max_tokens", "frequency_penalty", "presence_penalty"):
+        value = eff.get(key)
+        if value is not None:
+            params[key] = value
+    stop = eff.get("stop")
+    if isinstance(stop, str):
+        stop = stop.strip()
+    if stop:
+        params["stop"] = [stop] if isinstance(stop, str) else list(stop)
+    return params
+
+
 def _content_to_text(content: Any) -> str:
     if isinstance(content, str):
         return content
@@ -122,13 +145,10 @@ class ChatOrchestrator:
         eff = self.store.effective_settings(user_id, conversation_id)
         conn = connection_id or eff.get("connection_id")
         model = model_name or eff.get("model_name")
-        temp = temperature if temperature is not None else eff.get("temperature")
         # Build from prior history, then persist the new user turn.
         messages = self._build_messages(conversation_id, text, images, eff)
         self.store.add_message(conversation_id, "user", text, tokens_in=_estimate_tokens(text))
-        params: dict[str, Any] = {}
-        if temp is not None:
-            params["temperature"] = temp
+        params = build_model_params(eff, temperature=temperature)
         return conn, model, messages, params
 
     def complete(

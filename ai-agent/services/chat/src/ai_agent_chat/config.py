@@ -24,6 +24,9 @@ class ChatSettings(BaseServiceSettings):
 
     # --- downstream services (Phase 4) -------------------------------------
     rag_api_base_url: str | None = None
+    # Operator-configured MCP server URLs this deployment can use. The UI lists these; a user/conversation
+    # enables a subset via the ``mcp_servers`` setting. (env: CHAT_MCP_SERVERS as a JSON array)
+    mcp_servers: list[str] = []
 
     # --- auth --------------------------------------------------------------
     auth_mode: str = "local"  # local | oidc | both
@@ -48,7 +51,7 @@ class ChatSettings(BaseServiceSettings):
 
     # --- per-request defaults ---------------------------------------------
     default_temperature: float = 0.7
-    default_memory_window: int = 12
+    default_memory_window: int = 10  # "past messages included"
     default_theme: str = "system"
 
     # --- CORS (dev) --------------------------------------------------------
