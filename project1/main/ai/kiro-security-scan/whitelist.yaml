@@ -1,0 +1,28 @@
+# =============================================================================
+# Whitelist of reviewed false positives (step 9).
+# A finding is whitelisted (excluded from the PASS/FAIL verdict, but still shown
+# in the HTML report under "Whitelisted findings") when it matches an entry.
+#
+# Matching rules:
+#   - If an entry has `fingerprint`, it must equal the finding's fingerprint
+#     (the 16-char hash shown in the YAML output / report). This is the most
+#     precise way to whitelist a specific finding.
+#   - Otherwise, every provided field must match the finding. Missing fields act
+#     as wildcards. Matching is case-insensitive and whitespace-normalized.
+#     Supported fields: file, vulnerability_id, vulnerability, severity.
+#   - `reason` is recorded in the report for auditability.
+# =============================================================================
+
+whitelist:
+  # Example 1: whitelist by exact fingerprint (copy it from the YAML output).
+  # - fingerprint: "a1b2c3d4e5f60718"
+  #   reason: "Reviewed 2026-09-09 by security team; sample key, not real."
+
+  # Example 2: whitelist a specific vuln class in a specific file.
+  # - file: "docs/example.md"
+  #   vulnerability_id: "LLM01"
+  #   reason: "Documentation deliberately demonstrates a prompt-injection sample."
+
+  # Example 3: whitelist a whole vuln id everywhere (use with care).
+  # - vulnerability_id: "LLM09"
+  #   reason: "Misinformation risk accepted for internal-only knowledge base."

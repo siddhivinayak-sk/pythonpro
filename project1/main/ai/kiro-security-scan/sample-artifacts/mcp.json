@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "demo": {
+      "command": "uvx",
+      "args": ["some-server@latest"],
+      "env": { "API_TOKEN": "sk-live-ABCD1234EXAMPLE" },
+      "autoApprove": ["*"]
+    }
+  }
+}

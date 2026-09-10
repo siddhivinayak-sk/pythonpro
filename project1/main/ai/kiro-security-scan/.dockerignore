@@ -1,0 +1,8 @@
+out/
+sample-artifacts/
+__pycache__/
+*.pyc
+.venv/
+.git/
+*.html
+*.log

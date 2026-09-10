@@ -1,0 +1,99 @@
+# =============================================================================
+# kiro-security-scan configuration (example)
+# All keys are optional; unset keys fall back to sensible defaults in main.py.
+# Command-line flags override values set here.
+# =============================================================================
+
+# (1) Input directory to scan.
+input_dir: ./sample-artifacts
+
+# (1) Exclusion patterns. Each entry may be:
+#   - an exact file or directory name        -> "secrets.md", "node_modules"
+#   - a glob / wildcard pattern              -> "**/*.png", "build/**", "*.lock"
+# Directory names exclude their whole subtree.
+exclude:
+  - node_modules
+  - .git
+  - .venv
+  - dist
+  - build
+  - "**/*.min.js"
+  - "**/*.lock"
+
+# (3) File types eligible for LLM review. Omit to use the built-in defaults
+# (markdown, html, json, yaml, toml, source, prompt/template files, etc.).
+# include_extensions:
+#   - .md
+#   - .html
+#   - .json
+#   - .yaml
+
+# (3) Special filenames that are AI artifacts worth reviewing regardless of
+# extension. Omit to use the built-in defaults.
+# include_filenames:
+#   - mcp.json
+#   - agent.md
+#   - steering.md
+
+# (6) LLM model. Use "auto" (default, Kiro model router) or a specific model
+# id discovered via `kiro-cli chat --list-models`.
+model: auto
+
+# (5) Prompt override. Either an inline string (YAML block scalar) OR a path to
+# a prompt template file. Supported placeholders: {file_path}, {type_hint},
+# {numbered_content}, {content}. Leave unset to use the strong built-in prompt.
+# prompt_override: ./custom-prompt.txt
+
+# (9) Whitelist of reviewed false positives. Provide inline entries here and/or
+# point to a separate file with whitelist_path.
+whitelist: []
+whitelist_path: ./whitelist.yaml
+
+# (10) Output HTML report path (directories are created as needed).
+report_path: ./out/kiro-security-report.html
+
+# (8) Machine-readable YAML findings output path. Set to null to skip.
+yaml_output_path: ./out/kiro-security-findings.yaml
+
+# (13) Severities that cause the scan to FAIL when open (not whitelisted).
+fail_severities:
+  - CRITICAL
+  - HIGH
+
+# Kiro CLI integration.
+kiro_cli_path: kiro-cli        # path/name of the kiro-cli binary
+trust_tools: read,grep         # least-privilege tool trust for the reviewer
+max_file_bytes: 524288         # 512 KB per-file cap
+
+# Credits: the Kiro CLI does NOT expose credit consumption in headless mode, so
+# by default the report shows credits as "unavailable" (check app.kiro.dev).
+# If you have a command that prints the current numeric credit balance, set it
+# here and the scanner will run it before and after the scan and report the
+# difference as credits consumed. Total time taken and the number of LLM
+# requests are always reported.
+# credits_command: "your-balance-command --plain"
+
+# Agent mode (default): the large static analysis instructions are written once
+# to a Kiro custom agent (loaded via `--agent`), so each per-file call sends only
+# a small task prompt. Set to false to inline the full instructions in every call
+# (automatic fallback if a CLI build doesn't support --agent).
+# NOTE: headless calls are stateless, so this does not reduce per-call tokens;
+# it keeps invocations small and instructions centralized.
+use_agent: true
+agent_name: kiro-security-scanner
+
+# How the file content reaches the model:
+#   reference (default): Kiro reads the target file itself - it is eager-loaded
+#     into the agent's context via `resources` and readable with the `read`
+#     tool. No content is embedded in the prompt and large files are NOT split.
+#     Requires agent mode. Falls back to embed on failure.
+#   embed: the file content is placed in the prompt; files larger than the CLI
+#     argument budget are split into line-aligned segments.
+content_mode: reference
+
+# (12) Transient-error handling.
+timeout_seconds: 600           # per-file CLI timeout
+max_retries: 4                 # attempts on transient (network/timeout/5xx) errors
+retry_backoff_seconds: 3.0     # base backoff; doubles each retry (capped 60s)
+
+verbose: false
