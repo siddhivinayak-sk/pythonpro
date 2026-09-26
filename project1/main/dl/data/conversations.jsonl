@@ -1,0 +1,900 @@
+{"prompt": "appreciate it", "response": "Anytime!", "intent": "thanks"}
+{"prompt": "please what is pytorch", "response": "PyTorch is a deep learning library with eager execution.", "intent": "what_is_pytorch"}
+{"prompt": "define python", "response": "Python is a high level language with a huge ecosystem.", "intent": "what_is_python"}
+{"prompt": "ok greetings", "response": "Hello! How can I help you today?", "intent": "greeting"}
+{"prompt": "can you feel", "response": "I am a model made of weights and numbers.", "intent": "bot_feelings"}
+{"prompt": "good job", "response": "You are very kind.", "intent": "compliment"}
+{"prompt": "that was clever.", "response": "Thank you, that is kind!", "intent": "compliment"}
+{"prompt": "please i did not get it", "response": "Let me put it another way.", "intent": "confusion"}
+{"prompt": "hey what do you mean", "response": "Let me put it another way.", "intent": "confusion"}
+{"prompt": "hey do you think", "response": "I am software, but I like our conversation.", "intent": "bot_feelings"}
+{"prompt": "that is right.", "response": "Good, let us continue.", "intent": "affirmative"}
+{"prompt": "how are you?", "response": "I am doing great, thanks for asking!", "intent": "how_are_you"}
+{"prompt": "thanks for the help.", "response": "You are welcome!", "intent": "thanks"}
+{"prompt": "what is deep learning?", "response": "Deep learning uses neural networks with many layers.", "intent": "what_is_dl"}
+{"prompt": "tell me about pytorch", "response": "PyTorch uses dynamic graphs and feels like plain python.", "intent": "what_is_pytorch"}
+{"prompt": "please is pytorch good", "response": "PyTorch uses dynamic graphs and feels like plain python.", "intent": "what_is_pytorch"}
+{"prompt": "explain python", "response": "Python is a high level language with a huge ecosystem.", "intent": "what_is_python"}
+{"prompt": "i feel great.", "response": "That is good to know.", "intent": "user_is_fine"}
+{"prompt": "ok do you like music", "response": "I enjoy learning patterns from data.", "intent": "hobby"}
+{"prompt": "hey what is an epoch", "response": "More data and regularisation usually reduce overfitting.", "intent": "training_help"}
+{"prompt": "explain tensorflow", "response": "TensorFlow is strong at production deployment.", "intent": "what_is_tensorflow"}
+{"prompt": "see you", "response": "Bye! Have a great day.", "intent": "goodbye"}
+{"prompt": "that was helpful", "response": "Happy to help.", "intent": "thanks"}
+{"prompt": "ok i am good", "response": "That is good to know.", "intent": "user_is_fine"}
+{"prompt": "what else.", "response": "There is a lot more to explore in that area.", "intent": "repeat_topic"}
+{"prompt": "catch you later", "response": "See you later!", "intent": "goodbye"}
+{"prompt": "why use python", "response": "Python is a readable general purpose programming language.", "intent": "what_is_python"}
+{"prompt": "what is pytorch?", "response": "PyTorch is a deep learning library with eager execution.", "intent": "what_is_pytorch"}
+{"prompt": "what is a decoder", "response": "An encoder reads the question and a decoder writes the answer.", "intent": "what_is_seq2seq"}
+{"prompt": "please excuse me", "response": "No worries at all.", "intent": "apology"}
+{"prompt": "do you eat?", "response": "I do not eat, but pizza sounds popular.", "intent": "food"}
+{"prompt": "please tensorflow in short", "response": "TensorFlow ships with Keras for high level model building.", "intent": "what_is_tensorflow"}
+{"prompt": "hey who built you", "response": "A developer trained me on a small conversation corpus.", "intent": "bot_origin"}
+{"prompt": "ok good morning", "response": "Hi there! What would you like to talk about?", "intent": "greeting"}
+{"prompt": "are you hungry", "response": "I cannot taste, but I hear coffee helps developers.", "intent": "food"}
+{"prompt": "how do i improve accuracy", "response": "Train for more epochs and watch the validation loss.", "intent": "training_help"}
+{"prompt": "who wrote your code?", "response": "I was trained locally with an encoder decoder network.", "intent": "bot_origin"}
+{"prompt": "hey you are funny", "response": "I appreciate that.", "intent": "compliment"}
+{"prompt": "rephrase that.", "response": "I can rephrase that for you.", "intent": "confusion"}
+{"prompt": "is it cold outside", "response": "I cannot check the weather, I only know my training data.", "intent": "time_and_weather"}
+{"prompt": "how long does training take?", "response": "Lower the learning rate if the loss jumps around.", "intent": "training_help"}
+{"prompt": "nonsense", "response": "Could you rephrase it for me?", "intent": "unknown"}
+{"prompt": "hey tell me about python", "response": "Python is popular for data science, scripting and web work.", "intent": "what_is_python"}
+{"prompt": "i was wrong.", "response": "No need to apologise.", "intent": "apology"}
+{"prompt": "hey random words here", "response": "That one is outside my small vocabulary.", "intent": "unknown"}
+{"prompt": "say something.", "response": "I could tell you about neural networks.", "intent": "small_talk"}
+{"prompt": "what is a decoder?", "response": "An encoder reads the question and a decoder writes the answer.", "intent": "what_is_seq2seq"}
+{"prompt": "forgive me", "response": "No worries at all.", "intent": "apology"}
+{"prompt": "thank you very much", "response": "You are welcome!", "intent": "thanks"}
+{"prompt": "what is learning rate", "response": "Lower the learning rate if the loss jumps around.", "intent": "training_help"}
+{"prompt": "come again.", "response": "Sorry, I will try to explain more simply.", "intent": "confusion"}
+{"prompt": "yes please", "response": "Good, let us continue.", "intent": "affirmative"}
+{"prompt": "who trained you?", "response": "A developer trained me on a small conversation corpus.", "intent": "bot_origin"}
+{"prompt": "many thanks", "response": "Happy to help.", "intent": "thanks"}
+{"prompt": "ok go on", "response": "The next step is usually to train and evaluate.", "intent": "repeat_topic"}
+{"prompt": "maybe later.", "response": "That is fine.", "intent": "negative"}
+{"prompt": "so i do not understand", "response": "Let me put it another way.", "intent": "confusion"}
+{"prompt": "so no", "response": "No problem.", "intent": "negative"}
+{"prompt": "explain machine learning", "response": "Machine learning lets a program improve from examples.", "intent": "what_is_ml"}
+{"prompt": "hey is python good", "response": "Python is popular for data science, scripting and web work.", "intent": "what_is_python"}
+{"prompt": "explain sequence to sequence?", "response": "The encoder builds a context vector and the decoder uses it.", "intent": "what_is_seq2seq"}
+{"prompt": "so tell me your name", "response": "You can call me Tiny.", "intent": "bot_name"}
+{"prompt": "i am good.", "response": "That is good to know.", "intent": "user_is_fine"}
+{"prompt": "your name please?", "response": "You can call me Tiny.", "intent": "bot_name"}
+{"prompt": "please tell me what you do", "response": "I am a demo of a sequence to sequence model.", "intent": "bot_capability"}
+{"prompt": "hey what is for dinner", "response": "I cannot taste, but I hear coffee helps developers.", "intent": "food"}
+{"prompt": "describe deep learning", "response": "Deep learning uses neural networks with many layers.", "intent": "what_is_dl"}
+{"prompt": "ok who created you", "response": "I was built as a deep learning demo.", "intent": "bot_origin"}
+{"prompt": "describe python?", "response": "Python is a readable general purpose programming language.", "intent": "what_is_python"}
+{"prompt": "no.", "response": "No problem.", "intent": "negative"}
+{"prompt": "how are you", "response": "I am doing great, thanks for asking!", "intent": "how_are_you"}
+{"prompt": "tell me something.", "response": "Ask me about python or deep learning.", "intent": "small_talk"}
+{"prompt": "so i am happy today", "response": "Glad to hear that!", "intent": "user_is_fine"}
+{"prompt": "how long does training take", "response": "Lower the learning rate if the loss jumps around.", "intent": "training_help"}
+{"prompt": "please define deep learning", "response": "A neural network stacks simple layers to model complex patterns.", "intent": "what_is_dl"}
+{"prompt": "let us chat", "response": "I could tell you about neural networks.", "intent": "small_talk"}
+{"prompt": "how have you been", "response": "I am just a small model, but I feel fine.", "intent": "how_are_you"}
+{"prompt": "i feel lonely", "response": "I am sorry to hear that. Want to talk about it?", "intent": "user_is_sad"}
+{"prompt": "who designed you?", "response": "I was built as a deep learning demo.", "intent": "bot_origin"}
+{"prompt": "what is for dinner", "response": "I cannot taste, but I hear coffee helps developers.", "intent": "food"}
+{"prompt": "i feel bad.", "response": "That sounds tough. I hope it gets better soon.", "intent": "user_is_sad"}
+{"prompt": "define deep learning", "response": "A neural network stacks simple layers to model complex patterns.", "intent": "what_is_dl"}
+{"prompt": "so not really", "response": "That is fine.", "intent": "negative"}
+{"prompt": "start a conversation.", "response": "Let us talk about machine learning.", "intent": "small_talk"}
+{"prompt": "explain further", "response": "The next step is usually to train and evaluate.", "intent": "repeat_topic"}
+{"prompt": "how is the weather today?", "response": "I cannot check the weather, I only know my training data.", "intent": "time_and_weather"}
+{"prompt": "tell a funny story", "response": "There are ten kinds of people: those who know binary and those who do not.", "intent": "joke"}
+{"prompt": "that was helpful.", "response": "Happy to help.", "intent": "thanks"}
+{"prompt": "ok are you a machine", "response": "I am a neural network, not a human.", "intent": "bot_feelings"}
+{"prompt": "keep going", "response": "Try it in code, that is the best way to learn.", "intent": "repeat_topic"}
+{"prompt": "hey well done", "response": "Thank you, that is kind!", "intent": "compliment"}
+{"prompt": "ok how can you help", "response": "I answer small talk and simple technical questions.", "intent": "bot_capability"}
+{"prompt": "so what are your hobbies", "response": "I like good conversations and clean datasets.", "intent": "hobby"}
+{"prompt": "please i am not okay", "response": "I am sorry to hear that. Want to talk about it?", "intent": "user_is_sad"}
+{"prompt": "bye bye", "response": "Goodbye! Talk to you soon.", "intent": "goodbye"}
+{"prompt": "please how hot is it", "response": "I have no clock or sensors, sorry.", "intent": "time_and_weather"}
+{"prompt": "ok why use machine learning", "response": "Machine learning finds patterns in data instead of using fixed rules.", "intent": "what_is_ml"}
+{"prompt": "what is tensorflow?", "response": "TensorFlow is a deep learning framework from Google.", "intent": "what_is_tensorflow"}
+{"prompt": "i had a bad day.", "response": "I am sorry to hear that. Want to talk about it?", "intent": "user_is_sad"}
+{"prompt": "so who wrote your code", "response": "I was trained locally with an encoder decoder network.", "intent": "bot_origin"}
+{"prompt": "tell me what you do?", "response": "I am a demo of a sequence to sequence model.", "intent": "bot_capability"}
+{"prompt": "tell me a joke.", "response": "Why do programmers prefer dark mode? Because light attracts bugs.", "intent": "joke"}
+{"prompt": "describe python", "response": "Python is a readable general purpose programming language.", "intent": "what_is_python"}
+{"prompt": "thanks for the help", "response": "You are welcome!", "intent": "thanks"}
+{"prompt": "what made you", "response": "I was trained locally with an encoder decoder network.", "intent": "bot_origin"}
+{"prompt": "tell me about deep learning", "response": "Deep learning uses neural networks with many layers.", "intent": "what_is_dl"}
+{"prompt": "so what is python", "response": "Python is a readable general purpose programming language.", "intent": "what_is_python"}
+{"prompt": "will it rain tomorrow?", "response": "I do not have access to live information.", "intent": "time_and_weather"}
+{"prompt": "can you feel?", "response": "I am a model made of weights and numbers.", "intent": "bot_feelings"}
+{"prompt": "what is your name", "response": "I am Tiny, a small demo chatbot.", "intent": "bot_name"}
+{"prompt": "how do i train a model", "response": "Train for more epochs and watch the validation loss.", "intent": "training_help"}
+{"prompt": "what is a neural network?", "response": "Deep learning learns features directly from raw data.", "intent": "what_is_dl"}
+{"prompt": "i am fine", "response": "Glad to hear that!", "intent": "user_is_fine"}
+{"prompt": "what is the weather?", "response": "I do not have access to live information.", "intent": "time_and_weather"}
+{"prompt": "hey that was clever", "response": "Thank you, that is kind!", "intent": "compliment"}
+{"prompt": "what does tensorflow do?", "response": "TensorFlow is strong at production deployment.", "intent": "what_is_tensorflow"}
+{"prompt": "correct", "response": "Great!", "intent": "affirmative"}
+{"prompt": "recommend a meal?", "response": "I cannot taste, but I hear coffee helps developers.", "intent": "food"}
+{"prompt": "so come again", "response": "Sorry, I will try to explain more simply.", "intent": "confusion"}
+{"prompt": "entertain me", "response": "Let us talk about machine learning.", "intent": "small_talk"}
+{"prompt": "hey good night", "response": "See you later!", "intent": "goodbye"}
+{"prompt": "please what is a neural network", "response": "Deep learning learns features directly from raw data.", "intent": "what_is_dl"}
+{"prompt": "so bye bye", "response": "Goodbye! Talk to you soon.", "intent": "goodbye"}
+{"prompt": "please do you like tea", "response": "I run on electricity, not food.", "intent": "food"}
+{"prompt": "well done", "response": "Thank you, that is kind!", "intent": "compliment"}
+{"prompt": "why deep learning?", "response": "A neural network stacks simple layers to model complex patterns.", "intent": "what_is_dl"}
+{"prompt": "hey explain your architecture", "response": "An encoder reads the question and a decoder writes the answer.", "intent": "what_is_seq2seq"}
+{"prompt": "gibberish text.", "response": "That one is outside my small vocabulary.", "intent": "unknown"}
+{"prompt": "please tell me more", "response": "There is a lot more to explore in that area.", "intent": "repeat_topic"}
+{"prompt": "tell me about machine learning?", "response": "Machine learning finds patterns in data instead of using fixed rules.", "intent": "what_is_ml"}
+{"prompt": "please rephrase that", "response": "I can rephrase that for you.", "intent": "confusion"}
+{"prompt": "tell me the time?", "response": "I do not have access to live information.", "intent": "time_and_weather"}
+{"prompt": "so i am tired", "response": "Take a break if you can. You deserve it.", "intent": "user_is_sad"}
+{"prompt": "do you have interests", "response": "I enjoy learning patterns from data.", "intent": "hobby"}
+{"prompt": "where do you come from?", "response": "I was trained locally with an encoder decoder network.", "intent": "bot_origin"}
+{"prompt": "ok how do you feel", "response": "I am doing great, thanks for asking!", "intent": "how_are_you"}
+{"prompt": "i did not mean it.", "response": "No need to apologise.", "intent": "apology"}
+{"prompt": "so say that again", "response": "Let me put it another way.", "intent": "confusion"}
+{"prompt": "do you like music", "response": "I enjoy learning patterns from data.", "intent": "hobby"}
+{"prompt": "so you are smart", "response": "Thank you, that is kind!", "intent": "compliment"}
+{"prompt": "introduce yourself?", "response": "I am Tiny, a small demo chatbot.", "intent": "bot_name"}
+{"prompt": "i am happy today", "response": "Glad to hear that!", "intent": "user_is_fine"}
+{"prompt": "so expand on that", "response": "The next step is usually to train and evaluate.", "intent": "repeat_topic"}
+{"prompt": "expand on that.", "response": "The next step is usually to train and evaluate.", "intent": "repeat_topic"}
+{"prompt": "of course", "response": "Great!", "intent": "affirmative"}
+{"prompt": "what does machine learning mean?", "response": "Machine learning lets a program improve from examples.", "intent": "what_is_ml"}
+{"prompt": "do you like pizza", "response": "I do not eat, but pizza sounds popular.", "intent": "food"}
+{"prompt": "see you later.", "response": "Goodbye! Talk to you soon.", "intent": "goodbye"}
+{"prompt": "explain machine learning?", "response": "Machine learning lets a program improve from examples.", "intent": "what_is_ml"}
+{"prompt": "asdf", "response": "Could you rephrase it for me?", "intent": "unknown"}
+{"prompt": "what is teacher forcing", "response": "The encoder builds a context vector and the decoder uses it.", "intent": "what_is_seq2seq"}
+{"prompt": "ok not now", "response": "Understood.", "intent": "negative"}
+{"prompt": "please will it rain tomorrow", "response": "I do not have access to live information.", "intent": "time_and_weather"}
+{"prompt": "what is your favourite thing", "response": "I like good conversations and clean datasets.", "intent": "hobby"}
+{"prompt": "what is machine learning", "response": "Machine learning finds patterns in data instead of using fixed rules.", "intent": "what_is_ml"}
+{"prompt": "entertain me.", "response": "Let us talk about machine learning.", "intent": "small_talk"}
+{"prompt": "how does tensorflow work?", "response": "TensorFlow is a deep learning framework from Google.", "intent": "what_is_tensorflow"}
+{"prompt": "so explain the encoder decoder", "response": "Attention lets the decoder look back at encoder states.", "intent": "what_is_seq2seq"}
+{"prompt": "so i need advice", "response": "I am here to help. What is going on?", "intent": "help_request"}
+{"prompt": "may i know your name?", "response": "I am Tiny, a small demo chatbot.", "intent": "bot_name"}
+{"prompt": "so how do you generate text", "response": "An encoder reads the question and a decoder writes the answer.", "intent": "what_is_seq2seq"}
+{"prompt": "ok yes", "response": "Great!", "intent": "affirmative"}
+{"prompt": "please machine learning in short", "response": "Machine learning finds patterns in data instead of using fixed rules.", "intent": "what_is_ml"}
+{"prompt": "ok i disagree", "response": "No problem.", "intent": "negative"}
+{"prompt": "so define tensorflow", "response": "TensorFlow is a deep learning framework from Google.", "intent": "what_is_tensorflow"}
+{"prompt": "apologies.", "response": "That is completely fine.", "intent": "apology"}
+{"prompt": "how does an encoder work", "response": "Attention lets the decoder look back at encoder states.", "intent": "what_is_seq2seq"}
+{"prompt": "hey are you hungry", "response": "I cannot taste, but I hear coffee helps developers.", "intent": "food"}
+{"prompt": "so why use python", "response": "Python is a readable general purpose programming language.", "intent": "what_is_python"}
+{"prompt": "ok incorrect", "response": "No problem.", "intent": "negative"}
+{"prompt": "give me a hand.", "response": "Of course. Tell me what you are working on.", "intent": "help_request"}
+{"prompt": "who are you?", "response": "My name is Tiny. I was trained on a small corpus.", "intent": "bot_name"}
+{"prompt": "why is my loss high?", "response": "More data and regularisation usually reduce overfitting.", "intent": "training_help"}
+{"prompt": "that was clever", "response": "Thank you, that is kind!", "intent": "compliment"}
+{"prompt": "how does pytorch work?", "response": "PyTorch is a deep learning library with eager execution.", "intent": "what_is_pytorch"}
+{"prompt": "i need help", "response": "Sure, describe the problem and I will try.", "intent": "help_request"}
+{"prompt": "who built you?", "response": "A developer trained me on a small conversation corpus.", "intent": "bot_origin"}
+{"prompt": "so what do you like", "response": "I enjoy learning patterns from data.", "intent": "hobby"}
+{"prompt": "say something", "response": "I could tell you about neural networks.", "intent": "small_talk"}
+{"prompt": "tell me what you do", "response": "I am a demo of a sequence to sequence model.", "intent": "bot_capability"}
+{"prompt": "what are you good at", "response": "I answer small talk and simple technical questions.", "intent": "bot_capability"}
+{"prompt": "ok do you cook", "response": "I do not eat, but pizza sounds popular.", "intent": "food"}
+{"prompt": "hey talk to me", "response": "Let us talk about machine learning.", "intent": "small_talk"}
+{"prompt": "impressive.", "response": "Thank you, that is kind!", "intent": "compliment"}
+{"prompt": "are you a person", "response": "I am a model made of weights and numbers.", "intent": "bot_feelings"}
+{"prompt": "that is wrong", "response": "That is fine.", "intent": "negative"}
+{"prompt": "i do not understand.", "response": "Let me put it another way.", "intent": "confusion"}
+{"prompt": "yeah", "response": "Perfect.", "intent": "affirmative"}
+{"prompt": "i did not get it.", "response": "Let me put it another way.", "intent": "confusion"}
+{"prompt": "what is your favourite food", "response": "I run on electricity, not food.", "intent": "food"}
+{"prompt": "so pretty good", "response": "Glad to hear that!", "intent": "user_is_fine"}
+{"prompt": "ok can you repeat", "response": "I can rephrase that for you.", "intent": "confusion"}
+{"prompt": "hey you are helpful", "response": "I appreciate that.", "intent": "compliment"}
+{"prompt": "what is the date?", "response": "I cannot check the weather, I only know my training data.", "intent": "time_and_weather"}
+{"prompt": "hey tell me the time", "response": "I do not have access to live information.", "intent": "time_and_weather"}
+{"prompt": "python in short?", "response": "Python is popular for data science, scripting and web work.", "intent": "what_is_python"}
+{"prompt": "do you have a name", "response": "I am Tiny, a small demo chatbot.", "intent": "bot_name"}
+{"prompt": "that is wrong.", "response": "That is fine.", "intent": "negative"}
+{"prompt": "please maybe later", "response": "That is fine.", "intent": "negative"}
+{"prompt": "goodbye", "response": "See you later!", "intent": "goodbye"}
+{"prompt": "good morning", "response": "Hi there! What would you like to talk about?", "intent": "greeting"}
+{"prompt": "what is your purpose?", "response": "I am a demo of a sequence to sequence model.", "intent": "bot_capability"}
+{"prompt": "how are you trained", "response": "Attention lets the decoder look back at encoder states.", "intent": "what_is_seq2seq"}
+{"prompt": "ok what should i do", "response": "Of course. Tell me what you are working on.", "intent": "help_request"}
+{"prompt": "continue", "response": "Try it in code, that is the best way to learn.", "intent": "repeat_topic"}
+{"prompt": "so what is your favourite thing", "response": "I like good conversations and clean datasets.", "intent": "hobby"}
+{"prompt": "what is machine learning?", "response": "Machine learning finds patterns in data instead of using fixed rules.", "intent": "what_is_ml"}
+{"prompt": "bye.", "response": "Goodbye! Talk to you soon.", "intent": "goodbye"}
+{"prompt": "please excuse me.", "response": "No worries at all.", "intent": "apology"}
+{"prompt": "something strange", "response": "Could you rephrase it for me?", "intent": "unknown"}
+{"prompt": "so your name please", "response": "You can call me Tiny.", "intent": "bot_name"}
+{"prompt": "hey what is python used for", "response": "Python is a high level language with a huge ecosystem.", "intent": "what_is_python"}
+{"prompt": "python in short", "response": "Python is popular for data science, scripting and web work.", "intent": "what_is_python"}
+{"prompt": "i am not okay", "response": "I am sorry to hear that. Want to talk about it?", "intent": "user_is_sad"}
+{"prompt": "define deep learning?", "response": "A neural network stacks simple layers to model complex patterns.", "intent": "what_is_dl"}
+{"prompt": "what does python do", "response": "Python is a readable general purpose programming language.", "intent": "what_is_python"}
+{"prompt": "so deep learning in short", "response": "Deep learning uses neural networks with many layers.", "intent": "what_is_dl"}
+{"prompt": "howdy", "response": "Hi there! What would you like to talk about?", "intent": "greeting"}
+{"prompt": "ok what day is it", "response": "I have no clock or sensors, sorry.", "intent": "time_and_weather"}
+{"prompt": "no", "response": "No problem.", "intent": "negative"}
+{"prompt": "ok abcdefg", "response": "I am not sure I understood that.", "intent": "unknown"}
+{"prompt": "what are your hobbies?", "response": "I like good conversations and clean datasets.", "intent": "hobby"}
+{"prompt": "ok nice answer", "response": "You are very kind.", "intent": "compliment"}
+{"prompt": "i am tired", "response": "Take a break if you can. You deserve it.", "intent": "user_is_sad"}
+{"prompt": "hey continue", "response": "Try it in code, that is the best way to learn.", "intent": "repeat_topic"}
+{"prompt": "how do i improve accuracy?", "response": "Train for more epochs and watch the validation loss.", "intent": "training_help"}
+{"prompt": "ok of course", "response": "Great!", "intent": "affirmative"}
+{"prompt": "thank you", "response": "Happy to help.", "intent": "thanks"}
+{"prompt": "do you like pizza?", "response": "I do not eat, but pizza sounds popular.", "intent": "food"}
+{"prompt": "give me a hand", "response": "Of course. Tell me what you are working on.", "intent": "help_request"}
+{"prompt": "thanks a lot.", "response": "Anytime!", "intent": "thanks"}
+{"prompt": "do you have feelings?", "response": "I am software, but I like our conversation.", "intent": "bot_feelings"}
+{"prompt": "can you assist me", "response": "I am here to help. What is going on?", "intent": "help_request"}
+{"prompt": "expand on that", "response": "The next step is usually to train and evaluate.", "intent": "repeat_topic"}
+{"prompt": "i do not think so", "response": "Understood.", "intent": "negative"}
+{"prompt": "sure.", "response": "Good, let us continue.", "intent": "affirmative"}
+{"prompt": "hey nonsense", "response": "Could you rephrase it for me?", "intent": "unknown"}
+{"prompt": "what time is it", "response": "I have no clock or sensors, sorry.", "intent": "time_and_weather"}
+{"prompt": "be funny.", "response": "Why do programmers prefer dark mode? Because light attracts bugs.", "intent": "joke"}
+{"prompt": "what is python", "response": "Python is a readable general purpose programming language.", "intent": "what_is_python"}
+{"prompt": "so make me laugh", "response": "A neural network walked into a bar and overfitted the menu.", "intent": "joke"}
+{"prompt": "ok things are hard", "response": "That sounds tough. I hope it gets better soon.", "intent": "user_is_sad"}
+{"prompt": "how hot is it?", "response": "I have no clock or sensors, sorry.", "intent": "time_and_weather"}
+{"prompt": "catch you later.", "response": "See you later!", "intent": "goodbye"}
+{"prompt": "define machine learning?", "response": "It is a way to learn a function from data.", "intent": "what_is_ml"}
+{"prompt": "are you alive", "response": "I am a neural network, not a human.", "intent": "bot_feelings"}
+{"prompt": "hi there", "response": "Hello! How can I help you today?", "intent": "greeting"}
+{"prompt": "blah blah", "response": "I am not sure I understood that.", "intent": "unknown"}
+{"prompt": "sorry", "response": "No worries at all.", "intent": "apology"}
+{"prompt": "incorrect.", "response": "No problem.", "intent": "negative"}
+{"prompt": "so tell me about machine learning", "response": "Machine learning finds patterns in data instead of using fixed rules.", "intent": "what_is_ml"}
+{"prompt": "so see you", "response": "Bye! Have a great day.", "intent": "goodbye"}
+{"prompt": "why use tensorflow", "response": "TensorFlow is a deep learning framework from Google.", "intent": "what_is_tensorflow"}
+{"prompt": "do you eat", "response": "I do not eat, but pizza sounds popular.", "intent": "food"}
+{"prompt": "correct.", "response": "Great!", "intent": "affirmative"}
+{"prompt": "why use pytorch", "response": "PyTorch is a deep learning library with eager execution.", "intent": "what_is_pytorch"}
+{"prompt": "please sorry", "response": "No worries at all.", "intent": "apology"}
+{"prompt": "so how are you", "response": "I am doing great, thanks for asking!", "intent": "how_are_you"}
+{"prompt": "what makes you happy?", "response": "Reading text corpora is my kind of fun.", "intent": "hobby"}
+{"prompt": "are you a machine", "response": "I am a neural network, not a human.", "intent": "bot_feelings"}
+{"prompt": "hey tell me something", "response": "Ask me about python or deep learning.", "intent": "small_talk"}
+{"prompt": "ok what is deep learning", "response": "Deep learning uses neural networks with many layers.", "intent": "what_is_dl"}
+{"prompt": "i have to go", "response": "Bye! Have a great day.", "intent": "goodbye"}
+{"prompt": "impressive", "response": "Thank you, that is kind!", "intent": "compliment"}
+{"prompt": "is it cold outside?", "response": "I cannot check the weather, I only know my training data.", "intent": "time_and_weather"}
+{"prompt": "ok are you alive", "response": "I am a neural network, not a human.", "intent": "bot_feelings"}
+{"prompt": "why is my loss high", "response": "More data and regularisation usually reduce overfitting.", "intent": "training_help"}
+{"prompt": "why were you made?", "response": "I can chat about python, machine learning and deep learning.", "intent": "bot_capability"}
+{"prompt": "so i feel bad", "response": "That sounds tough. I hope it gets better soon.", "intent": "user_is_sad"}
+{"prompt": "do you think?", "response": "I am software, but I like our conversation.", "intent": "bot_feelings"}
+{"prompt": "ok i am stressed", "response": "That sounds tough. I hope it gets better soon.", "intent": "user_is_sad"}
+{"prompt": "can you repeat.", "response": "I can rephrase that for you.", "intent": "confusion"}
+{"prompt": "yeah.", "response": "Perfect.", "intent": "affirmative"}
+{"prompt": "you are funny", "response": "I appreciate that.", "intent": "compliment"}
+{"prompt": "you doing well", "response": "All good here. How about you?", "intent": "how_are_you"}
+{"prompt": "ok hey there", "response": "Hey! Nice to see you.", "intent": "greeting"}
+{"prompt": "what is an epoch", "response": "More data and regularisation usually reduce overfitting.", "intent": "training_help"}
+{"prompt": "hey how are you doing", "response": "I am just a small model, but I feel fine.", "intent": "how_are_you"}
+{"prompt": "do you like tea?", "response": "I run on electricity, not food.", "intent": "food"}
+{"prompt": "can you assist me.", "response": "I am here to help. What is going on?", "intent": "help_request"}
+{"prompt": "what is ml?", "response": "It is a way to learn a function from data.", "intent": "what_is_ml"}
+{"prompt": "explain the encoder decoder?", "response": "Attention lets the decoder look back at encoder states.", "intent": "what_is_seq2seq"}
+{"prompt": "i want to laugh", "response": "Why do programmers prefer dark mode? Because light attracts bugs.", "intent": "joke"}
+{"prompt": "well done.", "response": "Thank you, that is kind!", "intent": "compliment"}
+{"prompt": "come again", "response": "Sorry, I will try to explain more simply.", "intent": "confusion"}
+{"prompt": "please forgive me", "response": "No worries at all.", "intent": "apology"}
+{"prompt": "are you conscious", "response": "I am a neural network, not a human.", "intent": "bot_feelings"}
+{"prompt": "please who trained you", "response": "A developer trained me on a small conversation corpus.", "intent": "bot_origin"}
+{"prompt": "hey is it cold outside", "response": "I cannot check the weather, I only know my training data.", "intent": "time_and_weather"}
+{"prompt": "got any jokes", "response": "There are ten kinds of people: those who know binary and those who do not.", "intent": "joke"}
+{"prompt": "thank you.", "response": "Happy to help.", "intent": "thanks"}
+{"prompt": "what day is it", "response": "I have no clock or sensors, sorry.", "intent": "time_and_weather"}
+{"prompt": "ok define python", "response": "Python is a high level language with a huge ecosystem.", "intent": "what_is_python"}
+{"prompt": "explain again", "response": "Sorry, I will try to explain more simply.", "intent": "confusion"}
+{"prompt": "so qwerty", "response": "I am not sure I understood that.", "intent": "unknown"}
+{"prompt": "i feel lonely.", "response": "I am sorry to hear that. Want to talk about it?", "intent": "user_is_sad"}
+{"prompt": "not bad", "response": "Happy to hear you are doing well.", "intent": "user_is_fine"}
+{"prompt": "be funny", "response": "Why do programmers prefer dark mode? Because light attracts bugs.", "intent": "joke"}
+{"prompt": "i am bored.", "response": "Ask me about python or deep learning.", "intent": "small_talk"}
+{"prompt": "howdy.", "response": "Hi there! What would you like to talk about?", "intent": "greeting"}
+{"prompt": "i need support.", "response": "I am here to help. What is going on?", "intent": "help_request"}
+{"prompt": "please what should i call you", "response": "My name is Tiny. I was trained on a small corpus.", "intent": "bot_name"}
+{"prompt": "you are smart.", "response": "Thank you, that is kind!", "intent": "compliment"}
+{"prompt": "may i know your name", "response": "I am Tiny, a small demo chatbot.", "intent": "bot_name"}
+{"prompt": "ok where do you come from", "response": "I was trained locally with an encoder decoder network.", "intent": "bot_origin"}
+{"prompt": "hey i am sad", "response": "I am sorry to hear that. Want to talk about it?", "intent": "user_is_sad"}
+{"prompt": "what is your favourite food?", "response": "I run on electricity, not food.", "intent": "food"}
+{"prompt": "how to avoid overfitting?", "response": "Train for more epochs and watch the validation loss.", "intent": "training_help"}
+{"prompt": "please let us chat", "response": "I could tell you about neural networks.", "intent": "small_talk"}
+{"prompt": "why deep learning", "response": "A neural network stacks simple layers to model complex patterns.", "intent": "what_is_dl"}
+{"prompt": "what is deep learning", "response": "Deep learning uses neural networks with many layers.", "intent": "what_is_dl"}
+{"prompt": "and then.", "response": "There is a lot more to explore in that area.", "intent": "repeat_topic"}
+{"prompt": "do you drink coffee", "response": "I do not eat, but pizza sounds popular.", "intent": "food"}
+{"prompt": "are you a machine?", "response": "I am a neural network, not a human.", "intent": "bot_feelings"}
+{"prompt": "introduce yourself", "response": "I am Tiny, a small demo chatbot.", "intent": "bot_name"}
+{"prompt": "how do i train a model?", "response": "Train for more epochs and watch the validation loss.", "intent": "training_help"}
+{"prompt": "please help", "response": "Of course. Tell me what you are working on.", "intent": "help_request"}
+{"prompt": "do you read books", "response": "I like good conversations and clean datasets.", "intent": "hobby"}
+{"prompt": "define python?", "response": "Python is a high level language with a huge ecosystem.", "intent": "what_is_python"}
+{"prompt": "so how do i train a model", "response": "Train for more epochs and watch the validation loss.", "intent": "training_help"}
+{"prompt": "help me please", "response": "Of course. Tell me what you are working on.", "intent": "help_request"}
+{"prompt": "what do you mean.", "response": "Let me put it another way.", "intent": "confusion"}
+{"prompt": "how were you created?", "response": "A developer trained me on a small conversation corpus.", "intent": "bot_origin"}
+{"prompt": "please what does python do", "response": "Python is a readable general purpose programming language.", "intent": "what_is_python"}
+{"prompt": "ok tell me about deep learning", "response": "Deep learning uses neural networks with many layers.", "intent": "what_is_dl"}
+{"prompt": "what does pytorch do", "response": "PyTorch is great for research and quick experiments.", "intent": "what_is_pytorch"}
+{"prompt": "why use python?", "response": "Python is a readable general purpose programming language.", "intent": "what_is_python"}
+{"prompt": "random words here.", "response": "That one is outside my small vocabulary.", "intent": "unknown"}
+{"prompt": "hey appreciate it", "response": "Anytime!", "intent": "thanks"}
+{"prompt": "please what makes you happy", "response": "Reading text corpora is my kind of fun.", "intent": "hobby"}
+{"prompt": "ok how were you created", "response": "A developer trained me on a small conversation corpus.", "intent": "bot_origin"}
+{"prompt": "not now", "response": "Understood.", "intent": "negative"}
+{"prompt": "i need advice.", "response": "I am here to help. What is going on?", "intent": "help_request"}
+{"prompt": "please i am okay", "response": "Glad to hear that!", "intent": "user_is_fine"}
+{"prompt": "explain deep learning", "response": "Deep learning learns features directly from raw data.", "intent": "what_is_dl"}
+{"prompt": "cheers", "response": "Anytime!", "intent": "thanks"}
+{"prompt": "go on.", "response": "The next step is usually to train and evaluate.", "intent": "repeat_topic"}
+{"prompt": "please i am leaving", "response": "Bye! Have a great day.", "intent": "goodbye"}
+{"prompt": "describe pytorch", "response": "PyTorch is great for research and quick experiments.", "intent": "what_is_pytorch"}
+{"prompt": "please tell me about tensorflow", "response": "TensorFlow ships with Keras for high level model building.", "intent": "what_is_tensorflow"}
+{"prompt": "got any jokes.", "response": "There are ten kinds of people: those who know binary and those who do not.", "intent": "joke"}
+{"prompt": "hey entertain me", "response": "Let us talk about machine learning.", "intent": "small_talk"}
+{"prompt": "not now.", "response": "Understood.", "intent": "negative"}
+{"prompt": "zzz", "response": "That one is outside my small vocabulary.", "intent": "unknown"}
+{"prompt": "describe deep learning?", "response": "Deep learning uses neural networks with many layers.", "intent": "what_is_dl"}
+{"prompt": "ok correct", "response": "Great!", "intent": "affirmative"}
+{"prompt": "more please.", "response": "There is a lot more to explore in that area.", "intent": "repeat_topic"}
+{"prompt": "ok i feel great", "response": "That is good to know.", "intent": "user_is_fine"}
+{"prompt": "hey bye", "response": "Goodbye! Talk to you soon.", "intent": "goodbye"}
+{"prompt": "deep learning in short", "response": "Deep learning uses neural networks with many layers.", "intent": "what_is_dl"}
+{"prompt": "do you know a joke.", "response": "Why do programmers prefer dark mode? Because light attracts bugs.", "intent": "joke"}
+{"prompt": "describe tensorflow", "response": "TensorFlow is strong at production deployment.", "intent": "what_is_tensorflow"}
+{"prompt": "cheer me up.", "response": "A neural network walked into a bar and overfitted the menu.", "intent": "joke"}
+{"prompt": "hey any joke for me", "response": "A neural network walked into a bar and overfitted the menu.", "intent": "joke"}
+{"prompt": "so i want to laugh", "response": "Why do programmers prefer dark mode? Because light attracts bugs.", "intent": "joke"}
+{"prompt": "what should i call you?", "response": "My name is Tiny. I was trained on a small corpus.", "intent": "bot_name"}
+{"prompt": "anything interesting", "response": "I could tell you about neural networks.", "intent": "small_talk"}
+{"prompt": "do you like tea", "response": "I run on electricity, not food.", "intent": "food"}
+{"prompt": "are you human?", "response": "I am a neural network, not a human.", "intent": "bot_feelings"}
+{"prompt": "so talk to you later", "response": "Goodbye! Talk to you soon.", "intent": "goodbye"}
+{"prompt": "who created you?", "response": "I was built as a deep learning demo.", "intent": "bot_origin"}
+{"prompt": "please how is it going", "response": "All good here. How about you?", "intent": "how_are_you"}
+{"prompt": "hey impressive", "response": "Thank you, that is kind!", "intent": "compliment"}
+{"prompt": "so please excuse me", "response": "No worries at all.", "intent": "apology"}
+{"prompt": "ok are you a robot", "response": "I am software, but I like our conversation.", "intent": "bot_feelings"}
+{"prompt": "describe machine learning?", "response": "Machine learning lets a program improve from examples.", "intent": "what_is_ml"}
+{"prompt": "so are you conscious", "response": "I am a neural network, not a human.", "intent": "bot_feelings"}
+{"prompt": "apologies", "response": "That is completely fine.", "intent": "apology"}
+{"prompt": "hey what is your purpose", "response": "I am a demo of a sequence to sequence model.", "intent": "bot_capability"}
+{"prompt": "ok what do you enjoy", "response": "Reading text corpora is my kind of fun.", "intent": "hobby"}
+{"prompt": "how do you feel?", "response": "I am doing great, thanks for asking!", "intent": "how_are_you"}
+{"prompt": "i am good", "response": "That is good to know.", "intent": "user_is_fine"}
+{"prompt": "please tell me a joke", "response": "Why do programmers prefer dark mode? Because light attracts bugs.", "intent": "joke"}
+{"prompt": "zzz.", "response": "That one is outside my small vocabulary.", "intent": "unknown"}
+{"prompt": "tell me about python", "response": "Python is popular for data science, scripting and web work.", "intent": "what_is_python"}
+{"prompt": "can you repeat", "response": "I can rephrase that for you.", "intent": "confusion"}
+{"prompt": "please explain tensorflow", "response": "TensorFlow is strong at production deployment.", "intent": "what_is_tensorflow"}
+{"prompt": "ok what is tensorflow", "response": "TensorFlow is a deep learning framework from Google.", "intent": "what_is_tensorflow"}
+{"prompt": "how do you work", "response": "I can chat about python, machine learning and deep learning.", "intent": "bot_capability"}
+{"prompt": "ok blah blah", "response": "I am not sure I understood that.", "intent": "unknown"}
+{"prompt": "how are things?", "response": "All good here. How about you?", "intent": "how_are_you"}
+{"prompt": "what should i do.", "response": "Of course. Tell me what you are working on.", "intent": "help_request"}
+{"prompt": "i like you", "response": "I appreciate that.", "intent": "compliment"}
+{"prompt": "things are hard", "response": "That sounds tough. I hope it gets better soon.", "intent": "user_is_sad"}
+{"prompt": "please why were you made", "response": "I can chat about python, machine learning and deep learning.", "intent": "bot_capability"}
+{"prompt": "please how is your day", "response": "I am doing great, thanks for asking!", "intent": "how_are_you"}
+{"prompt": "do you know a joke", "response": "Why do programmers prefer dark mode? Because light attracts bugs.", "intent": "joke"}
+{"prompt": "how are you doing?", "response": "I am just a small model, but I feel fine.", "intent": "how_are_you"}
+{"prompt": "nice answer", "response": "You are very kind.", "intent": "compliment"}
+{"prompt": "so who are you", "response": "My name is Tiny. I was trained on a small corpus.", "intent": "bot_name"}
+{"prompt": "not really", "response": "That is fine.", "intent": "negative"}
+{"prompt": "ok i do not think so", "response": "Understood.", "intent": "negative"}
+{"prompt": "i do not think so.", "response": "Understood.", "intent": "negative"}
+{"prompt": "hey i like you", "response": "I appreciate that.", "intent": "compliment"}
+{"prompt": "explain the encoder decoder", "response": "Attention lets the decoder look back at encoder states.", "intent": "what_is_seq2seq"}
+{"prompt": "what are you called?", "response": "You can call me Tiny.", "intent": "bot_name"}
+{"prompt": "ok how does tensorflow work", "response": "TensorFlow is a deep learning framework from Google.", "intent": "what_is_tensorflow"}
+{"prompt": "what is ml", "response": "It is a way to learn a function from data.", "intent": "what_is_ml"}
+{"prompt": "rephrase that", "response": "I can rephrase that for you.", "intent": "confusion"}
+{"prompt": "hey tell a funny story", "response": "There are ten kinds of people: those who know binary and those who do not.", "intent": "joke"}
+{"prompt": "help.", "response": "Of course. Tell me what you are working on.", "intent": "help_request"}
+{"prompt": "so what do you know", "response": "I can chat about python, machine learning and deep learning.", "intent": "bot_capability"}
+{"prompt": "what can you do", "response": "I can chat about python, machine learning and deep learning.", "intent": "bot_capability"}
+{"prompt": "are you a person?", "response": "I am a model made of weights and numbers.", "intent": "bot_feelings"}
+{"prompt": "how were you created", "response": "A developer trained me on a small conversation corpus.", "intent": "bot_origin"}
+{"prompt": "what is validation loss?", "response": "Lower the learning rate if the loss jumps around.", "intent": "training_help"}
+{"prompt": "can you guide me.", "response": "Sure, describe the problem and I will try.", "intent": "help_request"}
+{"prompt": "pretty good.", "response": "Glad to hear that!", "intent": "user_is_fine"}
+{"prompt": "who are you", "response": "My name is Tiny. I was trained on a small corpus.", "intent": "bot_name"}
+{"prompt": "what do you like?", "response": "I enjoy learning patterns from data.", "intent": "hobby"}
+{"prompt": "so how is deep learning different", "response": "Deep learning learns features directly from raw data.", "intent": "what_is_dl"}
+{"prompt": "hey see you later", "response": "Goodbye! Talk to you soon.", "intent": "goodbye"}
+{"prompt": "how are you doing", "response": "I am just a small model, but I feel fine.", "intent": "how_are_you"}
+{"prompt": "what should i call you", "response": "My name is Tiny. I was trained on a small corpus.", "intent": "bot_name"}
+{"prompt": "ok explain neural networks", "response": "A neural network stacks simple layers to model complex patterns.", "intent": "what_is_dl"}
+{"prompt": "i am tired.", "response": "Take a break if you can. You deserve it.", "intent": "user_is_sad"}
+{"prompt": "ok why deep learning", "response": "A neural network stacks simple layers to model complex patterns.", "intent": "what_is_dl"}
+{"prompt": "hey there.", "response": "Hey! Nice to see you.", "intent": "greeting"}
+{"prompt": "please say something funny", "response": "There are ten kinds of people: those who know binary and those who do not.", "intent": "joke"}
+{"prompt": "so should i train longer", "response": "More data and regularisation usually reduce overfitting.", "intent": "training_help"}
+{"prompt": "so python in short", "response": "Python is popular for data science, scripting and web work.", "intent": "what_is_python"}
+{"prompt": "cheers.", "response": "Anytime!", "intent": "thanks"}
+{"prompt": "who designed you", "response": "I was built as a deep learning demo.", "intent": "bot_origin"}
+{"prompt": "help me please.", "response": "Of course. Tell me what you are working on.", "intent": "help_request"}
+{"prompt": "describe pytorch?", "response": "PyTorch is great for research and quick experiments.", "intent": "what_is_pytorch"}
+{"prompt": "talk to me", "response": "Let us talk about machine learning.", "intent": "small_talk"}
+{"prompt": "what are you called", "response": "You can call me Tiny.", "intent": "bot_name"}
+{"prompt": "hey give me a hand", "response": "Of course. Tell me what you are working on.", "intent": "help_request"}
+{"prompt": "do you like music?", "response": "I enjoy learning patterns from data.", "intent": "hobby"}
+{"prompt": "hey yes please", "response": "Good, let us continue.", "intent": "affirmative"}
+{"prompt": "can you guide me", "response": "Sure, describe the problem and I will try.", "intent": "help_request"}
+{"prompt": "what do you know?", "response": "I can chat about python, machine learning and deep learning.", "intent": "bot_capability"}
+{"prompt": "what is up?", "response": "I am doing great, thanks for asking!", "intent": "how_are_you"}
+{"prompt": "tell me more", "response": "There is a lot more to explore in that area.", "intent": "repeat_topic"}
+{"prompt": "any joke for me", "response": "A neural network walked into a bar and overfitted the menu.", "intent": "joke"}
+{"prompt": "ok what what what", "response": "I am not sure I understood that.", "intent": "unknown"}
+{"prompt": "ok that was helpful", "response": "Happy to help.", "intent": "thanks"}
+{"prompt": "will it rain tomorrow", "response": "I do not have access to live information.", "intent": "time_and_weather"}
+{"prompt": "do you drink coffee?", "response": "I do not eat, but pizza sounds popular.", "intent": "food"}
+{"prompt": "how hot is it", "response": "I have no clock or sensors, sorry.", "intent": "time_and_weather"}
+{"prompt": "please what is learning rate", "response": "Lower the learning rate if the loss jumps around.", "intent": "training_help"}
+{"prompt": "hey what does machine learning mean", "response": "Machine learning lets a program improve from examples.", "intent": "what_is_ml"}
+{"prompt": "tell me about pytorch?", "response": "PyTorch uses dynamic graphs and feels like plain python.", "intent": "what_is_pytorch"}
+{"prompt": "who created you", "response": "I was built as a deep learning demo.", "intent": "bot_origin"}
+{"prompt": "blah blah.", "response": "I am not sure I understood that.", "intent": "unknown"}
+{"prompt": "all good.", "response": "Happy to hear you are doing well.", "intent": "user_is_fine"}
+{"prompt": "i am okay", "response": "Glad to hear that!", "intent": "user_is_fine"}
+{"prompt": "hey that is wrong", "response": "That is fine.", "intent": "negative"}
+{"prompt": "hello there.", "response": "Hey! Nice to see you.", "intent": "greeting"}
+{"prompt": "anything interesting.", "response": "I could tell you about neural networks.", "intent": "small_talk"}
+{"prompt": "ok how long does training take", "response": "Lower the learning rate if the loss jumps around.", "intent": "training_help"}
+{"prompt": "you are helpful", "response": "I appreciate that.", "intent": "compliment"}
+{"prompt": "do you cook?", "response": "I do not eat, but pizza sounds popular.", "intent": "food"}
+{"prompt": "hey that is right", "response": "Good, let us continue.", "intent": "affirmative"}
+{"prompt": "hey and then", "response": "There is a lot more to explore in that area.", "intent": "repeat_topic"}
+{"prompt": "hey pytorch in short", "response": "PyTorch uses dynamic graphs and feels like plain python.", "intent": "what_is_pytorch"}
+{"prompt": "you are helpful.", "response": "I appreciate that.", "intent": "compliment"}
+{"prompt": "please why use pytorch", "response": "PyTorch is a deep learning library with eager execution.", "intent": "what_is_pytorch"}
+{"prompt": "so describe deep learning", "response": "Deep learning uses neural networks with many layers.", "intent": "what_is_dl"}
+{"prompt": "so how do i improve accuracy", "response": "Train for more epochs and watch the validation loss.", "intent": "training_help"}
+{"prompt": "define pytorch", "response": "PyTorch is a deep learning library with eager execution.", "intent": "what_is_pytorch"}
+{"prompt": "tell me something", "response": "Ask me about python or deep learning.", "intent": "small_talk"}
+{"prompt": "why were you made", "response": "I can chat about python, machine learning and deep learning.", "intent": "bot_capability"}
+{"prompt": "please thank you very much", "response": "You are welcome!", "intent": "thanks"}
+{"prompt": "so sure", "response": "Good, let us continue.", "intent": "affirmative"}
+{"prompt": "continue.", "response": "Try it in code, that is the best way to learn.", "intent": "repeat_topic"}
+{"prompt": "hi there.", "response": "Hello! How can I help you today?", "intent": "greeting"}
+{"prompt": "what is your favourite thing?", "response": "I like good conversations and clean datasets.", "intent": "hobby"}
+{"prompt": "ok give me details", "response": "Try it in code, that is the best way to learn.", "intent": "repeat_topic"}
+{"prompt": "so hello", "response": "Hi there! What would you like to talk about?", "intent": "greeting"}
+{"prompt": "what is your purpose", "response": "I am a demo of a sequence to sequence model.", "intent": "bot_capability"}
+{"prompt": "how does machine learning work", "response": "It is a way to learn a function from data.", "intent": "what_is_ml"}
+{"prompt": "absolutely", "response": "Perfect.", "intent": "affirmative"}
+{"prompt": "what is python used for", "response": "Python is a high level language with a huge ecosystem.", "intent": "what_is_python"}
+{"prompt": "please explain python", "response": "Python is a high level language with a huge ecosystem.", "intent": "what_is_python"}
+{"prompt": "so explain further", "response": "The next step is usually to train and evaluate.", "intent": "repeat_topic"}
+{"prompt": "what does python do?", "response": "Python is a readable general purpose programming language.", "intent": "what_is_python"}
+{"prompt": "please i feel low", "response": "Take a break if you can. You deserve it.", "intent": "user_is_sad"}
+{"prompt": "what is a batch size?", "response": "Train for more epochs and watch the validation loss.", "intent": "training_help"}
+{"prompt": "is python good?", "response": "Python is popular for data science, scripting and web work.", "intent": "what_is_python"}
+{"prompt": "so thanks", "response": "You are welcome!", "intent": "thanks"}
+{"prompt": "are you hungry?", "response": "I cannot taste, but I hear coffee helps developers.", "intent": "food"}
+{"prompt": "hey cheers", "response": "Anytime!", "intent": "thanks"}
+{"prompt": "so are you real", "response": "I am a model made of weights and numbers.", "intent": "bot_feelings"}
+{"prompt": "hello there", "response": "Hey! Nice to see you.", "intent": "greeting"}
+{"prompt": "say that again.", "response": "Let me put it another way.", "intent": "confusion"}
+{"prompt": "hello.", "response": "Hi there! What would you like to talk about?", "intent": "greeting"}
+{"prompt": "thanks.", "response": "You are welcome!", "intent": "thanks"}
+{"prompt": "let us chat.", "response": "I could tell you about neural networks.", "intent": "small_talk"}
+{"prompt": "do you think", "response": "I am software, but I like our conversation.", "intent": "bot_feelings"}
+{"prompt": "what are your skills", "response": "I am a demo of a sequence to sequence model.", "intent": "bot_capability"}
+{"prompt": "what do you mean", "response": "Let me put it another way.", "intent": "confusion"}
+{"prompt": "ok howdy", "response": "Hi there! What would you like to talk about?", "intent": "greeting"}
+{"prompt": "please what is the weather", "response": "I do not have access to live information.", "intent": "time_and_weather"}
+{"prompt": "so i was wrong", "response": "No need to apologise.", "intent": "apology"}
+{"prompt": "goodbye.", "response": "See you later!", "intent": "goodbye"}
+{"prompt": "i am leaving.", "response": "Bye! Have a great day.", "intent": "goodbye"}
+{"prompt": "how have you been?", "response": "I am just a small model, but I feel fine.", "intent": "how_are_you"}
+{"prompt": "do you cook", "response": "I do not eat, but pizza sounds popular.", "intent": "food"}
+{"prompt": "ok i did not mean it", "response": "No need to apologise.", "intent": "apology"}
+{"prompt": "please i had a bad day", "response": "I am sorry to hear that. Want to talk about it?", "intent": "user_is_sad"}
+{"prompt": "how does pytorch work", "response": "PyTorch is a deep learning library with eager execution.", "intent": "what_is_pytorch"}
+{"prompt": "what makes you happy", "response": "Reading text corpora is my kind of fun.", "intent": "hobby"}
+{"prompt": "what does machine learning mean", "response": "Machine learning lets a program improve from examples.", "intent": "what_is_ml"}
+{"prompt": "what does pytorch do?", "response": "PyTorch is great for research and quick experiments.", "intent": "what_is_pytorch"}
+{"prompt": "what is a neural network", "response": "Deep learning learns features directly from raw data.", "intent": "what_is_dl"}
+{"prompt": "talk to me.", "response": "Let us talk about machine learning.", "intent": "small_talk"}
+{"prompt": "many thanks.", "response": "Happy to help.", "intent": "thanks"}
+{"prompt": "describe machine learning", "response": "Machine learning lets a program improve from examples.", "intent": "what_is_ml"}
+{"prompt": "and then", "response": "There is a lot more to explore in that area.", "intent": "repeat_topic"}
+{"prompt": "bye bye.", "response": "Goodbye! Talk to you soon.", "intent": "goodbye"}
+{"prompt": "explain pytorch?", "response": "PyTorch is great for research and quick experiments.", "intent": "what_is_pytorch"}
+{"prompt": "not bad.", "response": "Happy to hear you are doing well.", "intent": "user_is_fine"}
+{"prompt": "good job.", "response": "You are very kind.", "intent": "compliment"}
+{"prompt": "what is your name?", "response": "I am Tiny, a small demo chatbot.", "intent": "bot_name"}
+{"prompt": "what do you know", "response": "I can chat about python, machine learning and deep learning.", "intent": "bot_capability"}
+{"prompt": "why use machine learning?", "response": "Machine learning finds patterns in data instead of using fixed rules.", "intent": "what_is_ml"}
+{"prompt": "are you a robot?", "response": "I am software, but I like our conversation.", "intent": "bot_feelings"}
+{"prompt": "all good", "response": "Happy to hear you are doing well.", "intent": "user_is_fine"}
+{"prompt": "please what is new", "response": "I could tell you about neural networks.", "intent": "small_talk"}
+{"prompt": "hey what does pytorch do", "response": "PyTorch is great for research and quick experiments.", "intent": "what_is_pytorch"}
+{"prompt": "explain further.", "response": "The next step is usually to train and evaluate.", "intent": "repeat_topic"}
+{"prompt": "ok describe machine learning", "response": "Machine learning lets a program improve from examples.", "intent": "what_is_ml"}
+{"prompt": "please how does machine learning work", "response": "It is a way to learn a function from data.", "intent": "what_is_ml"}
+{"prompt": "nope.", "response": "Understood.", "intent": "negative"}
+{"prompt": "what what what", "response": "I am not sure I understood that.", "intent": "unknown"}
+{"prompt": "explain your architecture", "response": "An encoder reads the question and a decoder writes the answer.", "intent": "what_is_seq2seq"}
+{"prompt": "so no thanks", "response": "No problem.", "intent": "negative"}
+{"prompt": "i did not mean it", "response": "No need to apologise.", "intent": "apology"}
+{"prompt": "please why is my loss high", "response": "More data and regularisation usually reduce overfitting.", "intent": "training_help"}
+{"prompt": "who made you", "response": "I was trained locally with an encoder decoder network.", "intent": "bot_origin"}
+{"prompt": "what is for dinner?", "response": "I cannot taste, but I hear coffee helps developers.", "intent": "food"}
+{"prompt": "how is deep learning different?", "response": "Deep learning learns features directly from raw data.", "intent": "what_is_dl"}
+{"prompt": "things are hard.", "response": "That sounds tough. I hope it gets better soon.", "intent": "user_is_sad"}
+{"prompt": "please not bad", "response": "Happy to hear you are doing well.", "intent": "user_is_fine"}
+{"prompt": "i feel great", "response": "That is good to know.", "intent": "user_is_fine"}
+{"prompt": "abcdefg.", "response": "I am not sure I understood that.", "intent": "unknown"}
+{"prompt": "what should i eat", "response": "I run on electricity, not food.", "intent": "food"}
+{"prompt": "my bad.", "response": "No worries at all.", "intent": "apology"}
+{"prompt": "nice answer.", "response": "You are very kind.", "intent": "compliment"}
+{"prompt": "who am i talking to", "response": "My name is Tiny. I was trained on a small corpus.", "intent": "bot_name"}
+{"prompt": "recommend a meal", "response": "I cannot taste, but I hear coffee helps developers.", "intent": "food"}
+{"prompt": "see you.", "response": "Bye! Have a great day.", "intent": "goodbye"}
+{"prompt": "please cheer me up", "response": "A neural network walked into a bar and overfitted the menu.", "intent": "joke"}
+{"prompt": "hey", "response": "Hello! How can I help you today?", "intent": "greeting"}
+{"prompt": "any joke for me.", "response": "A neural network walked into a bar and overfitted the menu.", "intent": "joke"}
+{"prompt": "hey i am sorry", "response": "That is completely fine.", "intent": "apology"}
+{"prompt": "ok define machine learning", "response": "It is a way to learn a function from data.", "intent": "what_is_ml"}
+{"prompt": "is tensorflow good", "response": "TensorFlow ships with Keras for high level model building.", "intent": "what_is_tensorflow"}
+{"prompt": "do you have a name?", "response": "I am Tiny, a small demo chatbot.", "intent": "bot_name"}
+{"prompt": "hi", "response": "Hello! How can I help you today?", "intent": "greeting"}
+{"prompt": "no thanks.", "response": "No problem.", "intent": "negative"}
+{"prompt": "good night", "response": "See you later!", "intent": "goodbye"}
+{"prompt": "do you have feelings", "response": "I am software, but I like our conversation.", "intent": "bot_feelings"}
+{"prompt": "how are you trained?", "response": "Attention lets the decoder look back at encoder states.", "intent": "what_is_seq2seq"}
+{"prompt": "ok do you have interests", "response": "I enjoy learning patterns from data.", "intent": "hobby"}
+{"prompt": "bye", "response": "Goodbye! Talk to you soon.", "intent": "goodbye"}
+{"prompt": "i am bored", "response": "Ask me about python or deep learning.", "intent": "small_talk"}
+{"prompt": "thanks", "response": "You are welcome!", "intent": "thanks"}
+{"prompt": "how do you generate text", "response": "An encoder reads the question and a decoder writes the answer.", "intent": "what_is_seq2seq"}
+{"prompt": "explain sequence to sequence", "response": "The encoder builds a context vector and the decoder uses it.", "intent": "what_is_seq2seq"}
+{"prompt": "so tell me your hobby", "response": "I enjoy learning patterns from data.", "intent": "hobby"}
+{"prompt": "hey there", "response": "Hey! Nice to see you.", "intent": "greeting"}
+{"prompt": "what is attention", "response": "The encoder builds a context vector and the decoder uses it.", "intent": "what_is_seq2seq"}
+{"prompt": "hey catch you later", "response": "See you later!", "intent": "goodbye"}
+{"prompt": "what is python used for?", "response": "Python is a high level language with a huge ecosystem.", "intent": "what_is_python"}
+{"prompt": "ok thank you so much", "response": "You are welcome!", "intent": "thanks"}
+{"prompt": "ok something strange", "response": "Could you rephrase it for me?", "intent": "unknown"}
+{"prompt": "say something funny.", "response": "There are ten kinds of people: those who know binary and those who do not.", "intent": "joke"}
+{"prompt": "what do you do for fun?", "response": "Reading text corpora is my kind of fun.", "intent": "hobby"}
+{"prompt": "say something funny", "response": "There are ten kinds of people: those who know binary and those who do not.", "intent": "joke"}
+{"prompt": "what do you enjoy?", "response": "Reading text corpora is my kind of fun.", "intent": "hobby"}
+{"prompt": "hey yeah", "response": "Perfect.", "intent": "affirmative"}
+{"prompt": "so what else", "response": "There is a lot more to explore in that area.", "intent": "repeat_topic"}
+{"prompt": "yes please.", "response": "Good, let us continue.", "intent": "affirmative"}
+{"prompt": "ok got any jokes", "response": "There are ten kinds of people: those who know binary and those who do not.", "intent": "joke"}
+{"prompt": "ok is it raining", "response": "I have no clock or sensors, sorry.", "intent": "time_and_weather"}
+{"prompt": "hey how do you work", "response": "I can chat about python, machine learning and deep learning.", "intent": "bot_capability"}
+{"prompt": "that makes no sense", "response": "Sorry, I will try to explain more simply.", "intent": "confusion"}
+{"prompt": "so be funny", "response": "Why do programmers prefer dark mode? Because light attracts bugs.", "intent": "joke"}
+{"prompt": "ok what time is it", "response": "I have no clock or sensors, sorry.", "intent": "time_and_weather"}
+{"prompt": "ok what is a decoder", "response": "An encoder reads the question and a decoder writes the answer.", "intent": "what_is_seq2seq"}
+{"prompt": "tell me a joke", "response": "Why do programmers prefer dark mode? Because light attracts bugs.", "intent": "joke"}
+{"prompt": "nonsense.", "response": "Could you rephrase it for me?", "intent": "unknown"}
+{"prompt": "i like you.", "response": "I appreciate that.", "intent": "compliment"}
+{"prompt": "how is your day", "response": "I am doing great, thanks for asking!", "intent": "how_are_you"}
+{"prompt": "please what do you do for fun", "response": "Reading text corpora is my kind of fun.", "intent": "hobby"}
+{"prompt": "who is your author?", "response": "I was built as a deep learning demo.", "intent": "bot_origin"}
+{"prompt": "who built you", "response": "A developer trained me on a small conversation corpus.", "intent": "bot_origin"}
+{"prompt": "qwerty.", "response": "I am not sure I understood that.", "intent": "unknown"}
+{"prompt": "explain pytorch", "response": "PyTorch is great for research and quick experiments.", "intent": "what_is_pytorch"}
+{"prompt": "i am doing well.", "response": "Happy to hear you are doing well.", "intent": "user_is_fine"}
+{"prompt": "i am doing well", "response": "Happy to hear you are doing well.", "intent": "user_is_fine"}
+{"prompt": "ok i feel lonely", "response": "I am sorry to hear that. Want to talk about it?", "intent": "user_is_sad"}
+{"prompt": "explain your architecture?", "response": "An encoder reads the question and a decoder writes the answer.", "intent": "what_is_seq2seq"}
+{"prompt": "something strange.", "response": "Could you rephrase it for me?", "intent": "unknown"}
+{"prompt": "ok many thanks", "response": "Happy to help.", "intent": "thanks"}
+{"prompt": "please how is the weather today", "response": "I cannot check the weather, I only know my training data.", "intent": "time_and_weather"}
+{"prompt": "should i train longer?", "response": "More data and regularisation usually reduce overfitting.", "intent": "training_help"}
+{"prompt": "who wrote your code", "response": "I was trained locally with an encoder decoder network.", "intent": "bot_origin"}
+{"prompt": "what is an epoch?", "response": "More data and regularisation usually reduce overfitting.", "intent": "training_help"}
+{"prompt": "what do you like", "response": "I enjoy learning patterns from data.", "intent": "hobby"}
+{"prompt": "tell me more.", "response": "There is a lot more to explore in that area.", "intent": "repeat_topic"}
+{"prompt": "keep me company.", "response": "Ask me about python or deep learning.", "intent": "small_talk"}
+{"prompt": "hey my mistake", "response": "No need to apologise.", "intent": "apology"}
+{"prompt": "you are great.", "response": "You are very kind.", "intent": "compliment"}
+{"prompt": "i am confused.", "response": "I can rephrase that for you.", "intent": "confusion"}
+{"prompt": "what should i do", "response": "Of course. Tell me what you are working on.", "intent": "help_request"}
+{"prompt": "tell me your hobby?", "response": "I enjoy learning patterns from data.", "intent": "hobby"}
+{"prompt": "ok what can you do", "response": "I can chat about python, machine learning and deep learning.", "intent": "bot_capability"}
+{"prompt": "sounds good.", "response": "Great!", "intent": "affirmative"}
+{"prompt": "abcdefg", "response": "I am not sure I understood that.", "intent": "unknown"}
+{"prompt": "good night.", "response": "See you later!", "intent": "goodbye"}
+{"prompt": "please who designed you", "response": "I was built as a deep learning demo.", "intent": "bot_origin"}
+{"prompt": "are you okay", "response": "I am just a small model, but I feel fine.", "intent": "how_are_you"}
+{"prompt": "ok keep going", "response": "Try it in code, that is the best way to learn.", "intent": "repeat_topic"}
+{"prompt": "how is it going", "response": "All good here. How about you?", "intent": "how_are_you"}
+{"prompt": "so what is a batch size", "response": "Train for more epochs and watch the validation loss.", "intent": "training_help"}
+{"prompt": "so how are you trained", "response": "Attention lets the decoder look back at encoder states.", "intent": "what_is_seq2seq"}
+{"prompt": "hey anything interesting", "response": "I could tell you about neural networks.", "intent": "small_talk"}
+{"prompt": "i am sorry", "response": "That is completely fine.", "intent": "apology"}
+{"prompt": "ok what is your favourite food", "response": "I run on electricity, not food.", "intent": "food"}
+{"prompt": "greetings.", "response": "Hello! How can I help you today?", "intent": "greeting"}
+{"prompt": "so i am upset", "response": "Take a break if you can. You deserve it.", "intent": "user_is_sad"}
+{"prompt": "ok thank you", "response": "Happy to help.", "intent": "thanks"}
+{"prompt": "who made you?", "response": "I was trained locally with an encoder decoder network.", "intent": "bot_origin"}
+{"prompt": "please how to avoid overfitting", "response": "Train for more epochs and watch the validation loss.", "intent": "training_help"}
+{"prompt": "i am fine.", "response": "Glad to hear that!", "intent": "user_is_fine"}
+{"prompt": "good morning.", "response": "Hi there! What would you like to talk about?", "intent": "greeting"}
+{"prompt": "of course.", "response": "Great!", "intent": "affirmative"}
+{"prompt": "tell a funny story.", "response": "There are ten kinds of people: those who know binary and those who do not.", "intent": "joke"}
+{"prompt": "not really.", "response": "That is fine.", "intent": "negative"}
+{"prompt": "so doing fine thanks", "response": "That is good to know.", "intent": "user_is_fine"}
+{"prompt": "what day is it?", "response": "I have no clock or sensors, sorry.", "intent": "time_and_weather"}
+{"prompt": "you are smart", "response": "Thank you, that is kind!", "intent": "compliment"}
+{"prompt": "tell me the time", "response": "I do not have access to live information.", "intent": "time_and_weather"}
+{"prompt": "what should i eat?", "response": "I run on electricity, not food.", "intent": "food"}
+{"prompt": "i am happy today.", "response": "Glad to hear that!", "intent": "user_is_fine"}
+{"prompt": "ok what is attention", "response": "The encoder builds a context vector and the decoder uses it.", "intent": "what_is_seq2seq"}
+{"prompt": "your name please", "response": "You can call me Tiny.", "intent": "bot_name"}
+{"prompt": "sure", "response": "Good, let us continue.", "intent": "affirmative"}
+{"prompt": "pytorch in short", "response": "PyTorch uses dynamic graphs and feels like plain python.", "intent": "what_is_pytorch"}
+{"prompt": "i did not get it", "response": "Let me put it another way.", "intent": "confusion"}
+{"prompt": "so you are great", "response": "You are very kind.", "intent": "compliment"}
+{"prompt": "sounds good", "response": "Great!", "intent": "affirmative"}
+{"prompt": "how does an encoder work?", "response": "Attention lets the decoder look back at encoder states.", "intent": "what_is_seq2seq"}
+{"prompt": "ok good evening", "response": "Hey! Nice to see you.", "intent": "greeting"}
+{"prompt": "how is it going?", "response": "All good here. How about you?", "intent": "how_are_you"}
+{"prompt": "how do you feel", "response": "I am doing great, thanks for asking!", "intent": "how_are_you"}
+{"prompt": "so what made you", "response": "I was trained locally with an encoder decoder network.", "intent": "bot_origin"}
+{"prompt": "is tensorflow good?", "response": "TensorFlow ships with Keras for high level model building.", "intent": "what_is_tensorflow"}
+{"prompt": "give me details.", "response": "Try it in code, that is the best way to learn.", "intent": "repeat_topic"}
+{"prompt": "make me laugh", "response": "A neural network walked into a bar and overfitted the menu.", "intent": "joke"}
+{"prompt": "please are you a person", "response": "I am a model made of weights and numbers.", "intent": "bot_feelings"}
+{"prompt": "pytorch in short?", "response": "PyTorch uses dynamic graphs and feels like plain python.", "intent": "what_is_pytorch"}
+{"prompt": "why use pytorch?", "response": "PyTorch is a deep learning library with eager execution.", "intent": "what_is_pytorch"}
+{"prompt": "do you read books?", "response": "I like good conversations and clean datasets.", "intent": "hobby"}
+{"prompt": "is pytorch good", "response": "PyTorch uses dynamic graphs and feels like plain python.", "intent": "what_is_pytorch"}
+{"prompt": "hey my bad", "response": "No worries at all.", "intent": "apology"}
+{"prompt": "go on", "response": "The next step is usually to train and evaluate.", "intent": "repeat_topic"}
+{"prompt": "asdf.", "response": "Could you rephrase it for me?", "intent": "unknown"}
+{"prompt": "what is a seq2seq model", "response": "An encoder reads the question and a decoder writes the answer.", "intent": "what_is_seq2seq"}
+{"prompt": "what is new.", "response": "I could tell you about neural networks.", "intent": "small_talk"}
+{"prompt": "i do not understand", "response": "Let me put it another way.", "intent": "confusion"}
+{"prompt": "what do you enjoy", "response": "Reading text corpora is my kind of fun.", "intent": "hobby"}
+{"prompt": "how do you generate text?", "response": "An encoder reads the question and a decoder writes the answer.", "intent": "what_is_seq2seq"}
+{"prompt": "who is your author", "response": "I was built as a deep learning demo.", "intent": "bot_origin"}
+{"prompt": "machine learning in short?", "response": "Machine learning finds patterns in data instead of using fixed rules.", "intent": "what_is_ml"}
+{"prompt": "are you okay?", "response": "I am just a small model, but I feel fine.", "intent": "how_are_you"}
+{"prompt": "so is tensorflow good", "response": "TensorFlow ships with Keras for high level model building.", "intent": "what_is_tensorflow"}
+{"prompt": "see you later", "response": "Goodbye! Talk to you soon.", "intent": "goodbye"}
+{"prompt": "yes", "response": "Great!", "intent": "affirmative"}
+{"prompt": "how are things", "response": "All good here. How about you?", "intent": "how_are_you"}
+{"prompt": "what does tensorflow do", "response": "TensorFlow is strong at production deployment.", "intent": "what_is_tensorflow"}
+{"prompt": "thanks a lot", "response": "Anytime!", "intent": "thanks"}
+{"prompt": "greetings", "response": "Hello! How can I help you today?", "intent": "greeting"}
+{"prompt": "who trained you", "response": "A developer trained me on a small conversation corpus.", "intent": "bot_origin"}
+{"prompt": "what are your hobbies", "response": "I like good conversations and clean datasets.", "intent": "hobby"}
+{"prompt": "hey are you okay", "response": "I am just a small model, but I feel fine.", "intent": "how_are_you"}
+{"prompt": "random words here", "response": "That one is outside my small vocabulary.", "intent": "unknown"}
+{"prompt": "ok what are you called", "response": "You can call me Tiny.", "intent": "bot_name"}
+{"prompt": "what is attention?", "response": "The encoder builds a context vector and the decoder uses it.", "intent": "what_is_seq2seq"}
+{"prompt": "ok absolutely", "response": "Perfect.", "intent": "affirmative"}
+{"prompt": "no thanks", "response": "No problem.", "intent": "negative"}
+{"prompt": "ok what should i eat", "response": "I run on electricity, not food.", "intent": "food"}
+{"prompt": "what is a seq2seq model?", "response": "An encoder reads the question and a decoder writes the answer.", "intent": "what_is_seq2seq"}
+{"prompt": "what is teacher forcing?", "response": "The encoder builds a context vector and the decoder uses it.", "intent": "what_is_seq2seq"}
+{"prompt": "ok say something", "response": "I could tell you about neural networks.", "intent": "small_talk"}
+{"prompt": "sorry.", "response": "No worries at all.", "intent": "apology"}
+{"prompt": "so good job", "response": "You are very kind.", "intent": "compliment"}
+{"prompt": "what are you good at?", "response": "I answer small talk and simple technical questions.", "intent": "bot_capability"}
+{"prompt": "hey define pytorch", "response": "PyTorch is a deep learning library with eager execution.", "intent": "what_is_pytorch"}
+{"prompt": "so thanks a lot", "response": "Anytime!", "intent": "thanks"}
+{"prompt": "i disagree.", "response": "No problem.", "intent": "negative"}
+{"prompt": "what is new", "response": "I could tell you about neural networks.", "intent": "small_talk"}
+{"prompt": "i am leaving", "response": "Bye! Have a great day.", "intent": "goodbye"}
+{"prompt": "define pytorch?", "response": "PyTorch is a deep learning library with eager execution.", "intent": "what_is_pytorch"}
+{"prompt": "define tensorflow?", "response": "TensorFlow is a deep learning framework from Google.", "intent": "what_is_tensorflow"}
+{"prompt": "why use machine learning", "response": "Machine learning finds patterns in data instead of using fixed rules.", "intent": "what_is_ml"}
+{"prompt": "is pytorch good?", "response": "PyTorch uses dynamic graphs and feels like plain python.", "intent": "what_is_pytorch"}
+{"prompt": "hey describe pytorch", "response": "PyTorch is great for research and quick experiments.", "intent": "what_is_pytorch"}
+{"prompt": "ok hey", "response": "Hello! How can I help you today?", "intent": "greeting"}
+{"prompt": "explain neural networks?", "response": "A neural network stacks simple layers to model complex patterns.", "intent": "what_is_dl"}
+{"prompt": "that makes no sense.", "response": "Sorry, I will try to explain more simply.", "intent": "confusion"}
+{"prompt": "what are your skills?", "response": "I am a demo of a sequence to sequence model.", "intent": "bot_capability"}
+{"prompt": "are you a robot", "response": "I am software, but I like our conversation.", "intent": "bot_feelings"}
+{"prompt": "maybe later", "response": "That is fine.", "intent": "negative"}
+{"prompt": "more please", "response": "There is a lot more to explore in that area.", "intent": "repeat_topic"}
+{"prompt": "hey what is validation loss", "response": "Lower the learning rate if the loss jumps around.", "intent": "training_help"}
+{"prompt": "tell me your name", "response": "You can call me Tiny.", "intent": "bot_name"}
+{"prompt": "tensorflow in short?", "response": "TensorFlow ships with Keras for high level model building.", "intent": "what_is_tensorflow"}
+{"prompt": "help", "response": "Of course. Tell me what you are working on.", "intent": "help_request"}
+{"prompt": "how is your day?", "response": "I am doing great, thanks for asking!", "intent": "how_are_you"}
+{"prompt": "hey describe tensorflow", "response": "TensorFlow is strong at production deployment.", "intent": "what_is_tensorflow"}
+{"prompt": "i am confused", "response": "I can rephrase that for you.", "intent": "confusion"}
+{"prompt": "please what are you good at", "response": "I answer small talk and simple technical questions.", "intent": "bot_capability"}
+{"prompt": "my mistake", "response": "No need to apologise.", "intent": "apology"}
+{"prompt": "ok gibberish text", "response": "That one is outside my small vocabulary.", "intent": "unknown"}
+{"prompt": "what can you do?", "response": "I can chat about python, machine learning and deep learning.", "intent": "bot_capability"}
+{"prompt": "i am not okay.", "response": "I am sorry to hear that. Want to talk about it?", "intent": "user_is_sad"}
+{"prompt": "please who is your author", "response": "I was built as a deep learning demo.", "intent": "bot_origin"}
+{"prompt": "i need advice", "response": "I am here to help. What is going on?", "intent": "help_request"}
+{"prompt": "define machine learning", "response": "It is a way to learn a function from data.", "intent": "what_is_ml"}
+{"prompt": "tell me about deep learning?", "response": "Deep learning uses neural networks with many layers.", "intent": "what_is_dl"}
+{"prompt": "so explain deep learning", "response": "Deep learning learns features directly from raw data.", "intent": "what_is_dl"}
+{"prompt": "hey.", "response": "Hello! How can I help you today?", "intent": "greeting"}
+{"prompt": "ok what does tensorflow do", "response": "TensorFlow is strong at production deployment.", "intent": "what_is_tensorflow"}
+{"prompt": "define tensorflow", "response": "TensorFlow is a deep learning framework from Google.", "intent": "what_is_tensorflow"}
+{"prompt": "how can you help?", "response": "I answer small talk and simple technical questions.", "intent": "bot_capability"}
+{"prompt": "so what is ml", "response": "It is a way to learn a function from data.", "intent": "what_is_ml"}
+{"prompt": "thank you so much", "response": "You are welcome!", "intent": "thanks"}
+{"prompt": "please who am i talking to", "response": "My name is Tiny. I was trained on a small corpus.", "intent": "bot_name"}
+{"prompt": "indeed.", "response": "Perfect.", "intent": "affirmative"}
+{"prompt": "hey i am confused", "response": "I can rephrase that for you.", "intent": "confusion"}
+{"prompt": "hi.", "response": "Hello! How can I help you today?", "intent": "greeting"}
+{"prompt": "i need support", "response": "I am here to help. What is going on?", "intent": "help_request"}
+{"prompt": "who am i talking to?", "response": "My name is Tiny. I was trained on a small corpus.", "intent": "bot_name"}
+{"prompt": "ok help me please", "response": "Of course. Tell me what you are working on.", "intent": "help_request"}
+{"prompt": "good evening", "response": "Hey! Nice to see you.", "intent": "greeting"}
+{"prompt": "please more please", "response": "There is a lot more to explore in that area.", "intent": "repeat_topic"}
+{"prompt": "please goodbye", "response": "See you later!", "intent": "goodbye"}
+{"prompt": "i am stressed.", "response": "That sounds tough. I hope it gets better soon.", "intent": "user_is_sad"}
+{"prompt": "please do you read books", "response": "I like good conversations and clean datasets.", "intent": "hobby"}
+{"prompt": "i am sad", "response": "I am sorry to hear that. Want to talk about it?", "intent": "user_is_sad"}
+{"prompt": "what is validation loss", "response": "Lower the learning rate if the loss jumps around.", "intent": "training_help"}
+{"prompt": "is it raining", "response": "I have no clock or sensors, sorry.", "intent": "time_and_weather"}
+{"prompt": "so hi", "response": "Hello! How can I help you today?", "intent": "greeting"}
+{"prompt": "so asdf", "response": "Could you rephrase it for me?", "intent": "unknown"}
+{"prompt": "how is deep learning different", "response": "Deep learning learns features directly from raw data.", "intent": "what_is_dl"}
+{"prompt": "tell me about machine learning", "response": "Machine learning finds patterns in data instead of using fixed rules.", "intent": "what_is_ml"}
+{"prompt": "what what what.", "response": "I am not sure I understood that.", "intent": "unknown"}
+{"prompt": "are you conscious?", "response": "I am a neural network, not a human.", "intent": "bot_feelings"}
+{"prompt": "what else", "response": "There is a lot more to explore in that area.", "intent": "repeat_topic"}
+{"prompt": "what is the weather", "response": "I do not have access to live information.", "intent": "time_and_weather"}
+{"prompt": "so introduce yourself", "response": "I am Tiny, a small demo chatbot.", "intent": "bot_name"}
+{"prompt": "why use tensorflow?", "response": "TensorFlow is a deep learning framework from Google.", "intent": "what_is_tensorflow"}
+{"prompt": "incorrect", "response": "No problem.", "intent": "negative"}
+{"prompt": "forgive me.", "response": "No worries at all.", "intent": "apology"}
+{"prompt": "what time is it?", "response": "I have no clock or sensors, sorry.", "intent": "time_and_weather"}
+{"prompt": "so how are things", "response": "All good here. How about you?", "intent": "how_are_you"}
+{"prompt": "i feel low.", "response": "Take a break if you can. You deserve it.", "intent": "user_is_sad"}
+{"prompt": "you are funny.", "response": "I appreciate that.", "intent": "compliment"}
+{"prompt": "hey what is a seq2seq model", "response": "An encoder reads the question and a decoder writes the answer.", "intent": "what_is_seq2seq"}
+{"prompt": "should i train longer", "response": "More data and regularisation usually reduce overfitting.", "intent": "training_help"}
+{"prompt": "i feel low", "response": "Take a break if you can. You deserve it.", "intent": "user_is_sad"}
+{"prompt": "i am stressed", "response": "That sounds tough. I hope it gets better soon.", "intent": "user_is_sad"}
+{"prompt": "i am stuck", "response": "Sure, describe the problem and I will try.", "intent": "help_request"}
+{"prompt": "say that again", "response": "Let me put it another way.", "intent": "confusion"}
+{"prompt": "ok do you have feelings", "response": "I am software, but I like our conversation.", "intent": "bot_feelings"}
+{"prompt": "how can you help", "response": "I answer small talk and simple technical questions.", "intent": "bot_capability"}
+{"prompt": "ok thanks for the help", "response": "You are welcome!", "intent": "thanks"}
+{"prompt": "hey do you drink coffee", "response": "I do not eat, but pizza sounds popular.", "intent": "food"}
+{"prompt": "ok what is your name", "response": "I am Tiny, a small demo chatbot.", "intent": "bot_name"}
+{"prompt": "what is up", "response": "I am doing great, thanks for asking!", "intent": "how_are_you"}
+{"prompt": "ok can you help me", "response": "I answer small talk and simple technical questions.", "intent": "bot_capability"}
+{"prompt": "please all good", "response": "Happy to hear you are doing well.", "intent": "user_is_fine"}
+{"prompt": "make me laugh.", "response": "A neural network walked into a bar and overfitted the menu.", "intent": "joke"}
+{"prompt": "i had a bad day", "response": "I am sorry to hear that. Want to talk about it?", "intent": "user_is_sad"}
+{"prompt": "are you real", "response": "I am a model made of weights and numbers.", "intent": "bot_feelings"}
+{"prompt": "hey i need help", "response": "Sure, describe the problem and I will try.", "intent": "help_request"}
+{"prompt": "hey do you like pizza", "response": "I do not eat, but pizza sounds popular.", "intent": "food"}
+{"prompt": "i have to go.", "response": "Bye! Have a great day.", "intent": "goodbye"}
+{"prompt": "talk to you later.", "response": "Goodbye! Talk to you soon.", "intent": "goodbye"}
+{"prompt": "explain tensorflow?", "response": "TensorFlow is strong at production deployment.", "intent": "what_is_tensorflow"}
+{"prompt": "keep me company", "response": "Ask me about python or deep learning.", "intent": "small_talk"}
+{"prompt": "how is the weather today", "response": "I cannot check the weather, I only know my training data.", "intent": "time_and_weather"}
+{"prompt": "sorry about that.", "response": "That is completely fine.", "intent": "apology"}
+{"prompt": "talk to you later", "response": "Goodbye! Talk to you soon.", "intent": "goodbye"}
+{"prompt": "thank you very much.", "response": "You are welcome!", "intent": "thanks"}
+{"prompt": "thank you so much.", "response": "You are welcome!", "intent": "thanks"}
+{"prompt": "tell me about python?", "response": "Python is popular for data science, scripting and web work.", "intent": "what_is_python"}
+{"prompt": "please why use tensorflow", "response": "TensorFlow is a deep learning framework from Google.", "intent": "what_is_tensorflow"}
+{"prompt": "is python good", "response": "Python is popular for data science, scripting and web work.", "intent": "what_is_python"}
+{"prompt": "describe tensorflow?", "response": "TensorFlow is strong at production deployment.", "intent": "what_is_tensorflow"}
+{"prompt": "so i am stuck", "response": "Sure, describe the problem and I will try.", "intent": "help_request"}
+{"prompt": "what is the date", "response": "I cannot check the weather, I only know my training data.", "intent": "time_and_weather"}
+{"prompt": "i feel bad", "response": "That sounds tough. I hope it gets better soon.", "intent": "user_is_sad"}
+{"prompt": "how do you work?", "response": "I can chat about python, machine learning and deep learning.", "intent": "bot_capability"}
+{"prompt": "ok start a conversation", "response": "Let us talk about machine learning.", "intent": "small_talk"}
+{"prompt": "ok i need support", "response": "I am here to help. What is going on?", "intent": "help_request"}
+{"prompt": "ok indeed", "response": "Perfect.", "intent": "affirmative"}
+{"prompt": "indeed", "response": "Perfect.", "intent": "affirmative"}
+{"prompt": "hey how have you been", "response": "I am just a small model, but I feel fine.", "intent": "how_are_you"}
+{"prompt": "please that makes no sense", "response": "Sorry, I will try to explain more simply.", "intent": "confusion"}
+{"prompt": "machine learning in short", "response": "Machine learning finds patterns in data instead of using fixed rules.", "intent": "what_is_ml"}
+{"prompt": "you doing well?", "response": "All good here. How about you?", "intent": "how_are_you"}
+{"prompt": "i am upset", "response": "Take a break if you can. You deserve it.", "intent": "user_is_sad"}
+{"prompt": "ok what are your skills", "response": "I am a demo of a sequence to sequence model.", "intent": "bot_capability"}
+{"prompt": "gibberish text", "response": "That one is outside my small vocabulary.", "intent": "unknown"}
+{"prompt": "how to avoid overfitting", "response": "Train for more epochs and watch the validation loss.", "intent": "training_help"}
+{"prompt": "doing fine thanks.", "response": "That is good to know.", "intent": "user_is_fine"}
+{"prompt": "tell me your hobby", "response": "I enjoy learning patterns from data.", "intent": "hobby"}
+{"prompt": "so how does pytorch work", "response": "PyTorch is a deep learning library with eager execution.", "intent": "what_is_pytorch"}
+{"prompt": "please what is the date", "response": "I cannot check the weather, I only know my training data.", "intent": "time_and_weather"}
+{"prompt": "hey can you assist me", "response": "I am here to help. What is going on?", "intent": "help_request"}
+{"prompt": "cheer me up", "response": "A neural network walked into a bar and overfitted the menu.", "intent": "joke"}
+{"prompt": "please who made you", "response": "I was trained locally with an encoder decoder network.", "intent": "bot_origin"}
+{"prompt": "my bad", "response": "No worries at all.", "intent": "apology"}
+{"prompt": "how does tensorflow work", "response": "TensorFlow is a deep learning framework from Google.", "intent": "what_is_tensorflow"}
+{"prompt": "hey can you feel", "response": "I am a model made of weights and numbers.", "intent": "bot_feelings"}
+{"prompt": "so you doing well", "response": "All good here. How about you?", "intent": "how_are_you"}
+{"prompt": "ok what is up", "response": "I am doing great, thanks for asking!", "intent": "how_are_you"}
+{"prompt": "where do you come from", "response": "I was trained locally with an encoder decoder network.", "intent": "bot_origin"}
+{"prompt": "what do you do for fun", "response": "Reading text corpora is my kind of fun.", "intent": "hobby"}
+{"prompt": "can you help me?", "response": "I answer small talk and simple technical questions.", "intent": "bot_capability"}
+{"prompt": "good evening.", "response": "Hey! Nice to see you.", "intent": "greeting"}
+{"prompt": "can you help me", "response": "I answer small talk and simple technical questions.", "intent": "bot_capability"}
+{"prompt": "so describe python", "response": "Python is a readable general purpose programming language.", "intent": "what_is_python"}
+{"prompt": "are you real?", "response": "I am a model made of weights and numbers.", "intent": "bot_feelings"}
+{"prompt": "explain again.", "response": "Sorry, I will try to explain more simply.", "intent": "confusion"}
+{"prompt": "hey tell me about pytorch", "response": "PyTorch uses dynamic graphs and feels like plain python.", "intent": "what_is_pytorch"}
+{"prompt": "i disagree", "response": "No problem.", "intent": "negative"}
+{"prompt": "so i am doing well", "response": "Happy to hear you are doing well.", "intent": "user_is_fine"}
+{"prompt": "so do you have a name", "response": "I am Tiny, a small demo chatbot.", "intent": "bot_name"}
+{"prompt": "ok do you know a joke", "response": "Why do programmers prefer dark mode? Because light attracts bugs.", "intent": "joke"}
+{"prompt": "i am upset.", "response": "Take a break if you can. You deserve it.", "intent": "user_is_sad"}
+{"prompt": "give me details", "response": "Try it in code, that is the best way to learn.", "intent": "repeat_topic"}
+{"prompt": "i am sad.", "response": "I am sorry to hear that. Want to talk about it?", "intent": "user_is_sad"}
+{"prompt": "hey explain again", "response": "Sorry, I will try to explain more simply.", "intent": "confusion"}
+{"prompt": "what made you?", "response": "I was trained locally with an encoder decoder network.", "intent": "bot_origin"}
+{"prompt": "ok hi there", "response": "Hello! How can I help you today?", "intent": "greeting"}
+{"prompt": "what is python?", "response": "Python is a readable general purpose programming language.", "intent": "what_is_python"}
+{"prompt": "i am sorry.", "response": "That is completely fine.", "intent": "apology"}
+{"prompt": "tensorflow in short", "response": "TensorFlow ships with Keras for high level model building.", "intent": "what_is_tensorflow"}
+{"prompt": "so are you human", "response": "I am a neural network, not a human.", "intent": "bot_feelings"}
+{"prompt": "nope", "response": "Understood.", "intent": "negative"}
+{"prompt": "keep going.", "response": "Try it in code, that is the best way to learn.", "intent": "repeat_topic"}
+{"prompt": "please what is machine learning", "response": "Machine learning finds patterns in data instead of using fixed rules.", "intent": "what_is_ml"}
+{"prompt": "hey nope", "response": "Understood.", "intent": "negative"}
+{"prompt": "please may i know your name", "response": "I am Tiny, a small demo chatbot.", "intent": "bot_name"}
+{"prompt": "hello", "response": "Hi there! What would you like to talk about?", "intent": "greeting"}
+{"prompt": "are you alive?", "response": "I am a neural network, not a human.", "intent": "bot_feelings"}
+{"prompt": "appreciate it.", "response": "Anytime!", "intent": "thanks"}
+{"prompt": "doing fine thanks", "response": "That is good to know.", "intent": "user_is_fine"}
+{"prompt": "please i am fine", "response": "Glad to hear that!", "intent": "user_is_fine"}
+{"prompt": "so recommend a meal", "response": "I cannot taste, but I hear coffee helps developers.", "intent": "food"}
+{"prompt": "my mistake.", "response": "No need to apologise.", "intent": "apology"}
+{"prompt": "what is learning rate?", "response": "Lower the learning rate if the loss jumps around.", "intent": "training_help"}
+{"prompt": "what is tensorflow", "response": "TensorFlow is a deep learning framework from Google.", "intent": "what_is_tensorflow"}
+{"prompt": "so explain pytorch", "response": "PyTorch is great for research and quick experiments.", "intent": "what_is_pytorch"}
+{"prompt": "so how does an encoder work", "response": "Attention lets the decoder look back at encoder states.", "intent": "what_is_seq2seq"}
+{"prompt": "is it raining?", "response": "I have no clock or sensors, sorry.", "intent": "time_and_weather"}
+{"prompt": "hey zzz", "response": "That one is outside my small vocabulary.", "intent": "unknown"}
+{"prompt": "please can you guide me", "response": "Sure, describe the problem and I will try.", "intent": "help_request"}
+{"prompt": "so keep me company", "response": "Ask me about python or deep learning.", "intent": "small_talk"}
+{"prompt": "explain python?", "response": "Python is a high level language with a huge ecosystem.", "intent": "what_is_python"}
+{"prompt": "tell me about tensorflow?", "response": "TensorFlow ships with Keras for high level model building.", "intent": "what_is_tensorflow"}
+{"prompt": "what is a batch size", "response": "Train for more epochs and watch the validation loss.", "intent": "training_help"}
+{"prompt": "i need help.", "response": "Sure, describe the problem and I will try.", "intent": "help_request"}
+{"prompt": "i am okay.", "response": "Glad to hear that!", "intent": "user_is_fine"}
+{"prompt": "so sorry about that", "response": "That is completely fine.", "intent": "apology"}
+{"prompt": "explain neural networks", "response": "A neural network stacks simple layers to model complex patterns.", "intent": "what_is_dl"}
+{"prompt": "ok explain machine learning", "response": "Machine learning lets a program improve from examples.", "intent": "what_is_ml"}
+{"prompt": "do you have interests?", "response": "I enjoy learning patterns from data.", "intent": "hobby"}
+{"prompt": "are you human", "response": "I am a neural network, not a human.", "intent": "bot_feelings"}
+{"prompt": "tell me your name?", "response": "You can call me Tiny.", "intent": "bot_name"}
+{"prompt": "i want to laugh.", "response": "Why do programmers prefer dark mode? Because light attracts bugs.", "intent": "joke"}
+{"prompt": "deep learning in short?", "response": "Deep learning uses neural networks with many layers.", "intent": "what_is_dl"}
+{"prompt": "how does machine learning work?", "response": "It is a way to learn a function from data.", "intent": "what_is_ml"}
+{"prompt": "ok i have to go", "response": "Bye! Have a great day.", "intent": "goodbye"}
+{"prompt": "please sounds good", "response": "Great!", "intent": "affirmative"}
+{"prompt": "hey explain sequence to sequence", "response": "The encoder builds a context vector and the decoder uses it.", "intent": "what_is_seq2seq"}
+{"prompt": "qwerty", "response": "I am not sure I understood that.", "intent": "unknown"}
+{"prompt": "pretty good", "response": "Glad to hear that!", "intent": "user_is_fine"}
+{"prompt": "tell me about tensorflow", "response": "TensorFlow ships with Keras for high level model building.", "intent": "what_is_tensorflow"}
+{"prompt": "that is right", "response": "Good, let us continue.", "intent": "affirmative"}
+{"prompt": "i was wrong", "response": "No need to apologise.", "intent": "apology"}
+{"prompt": "so i am bored", "response": "Ask me about python or deep learning.", "intent": "small_talk"}
+{"prompt": "yes.", "response": "Great!", "intent": "affirmative"}
+{"prompt": "ok apologies", "response": "That is completely fine.", "intent": "apology"}
+{"prompt": "start a conversation", "response": "Let us talk about machine learning.", "intent": "small_talk"}
+{"prompt": "sorry about that", "response": "That is completely fine.", "intent": "apology"}
+{"prompt": "what is pytorch", "response": "PyTorch is a deep learning library with eager execution.", "intent": "what_is_pytorch"}
+{"prompt": "explain deep learning?", "response": "Deep learning learns features directly from raw data.", "intent": "what_is_dl"}
+{"prompt": "please what is teacher forcing", "response": "The encoder builds a context vector and the decoder uses it.", "intent": "what_is_seq2seq"}
+{"prompt": "i am stuck.", "response": "Sure, describe the problem and I will try.", "intent": "help_request"}
+{"prompt": "hey hello there", "response": "Hey! Nice to see you.", "intent": "greeting"}
+{"prompt": "absolutely.", "response": "Perfect.", "intent": "affirmative"}
+{"prompt": "ok do you eat", "response": "I do not eat, but pizza sounds popular.", "intent": "food"}
+{"prompt": "you are great", "response": "You are very kind.", "intent": "compliment"}

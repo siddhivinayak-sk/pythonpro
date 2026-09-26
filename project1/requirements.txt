@@ -5,6 +5,8 @@ matplotlib
 scikit-learn
 seaborn
 tensorflow
+torch
+pillow
 flask
 sqlalchemy
 pytest
