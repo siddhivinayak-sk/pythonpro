@@ -24,7 +24,7 @@ client = AzureOpenAI(
 messages = [
     {
         "role": "user",
-        "content": "What is SBCP?"
+        "content": "What is BCP?"
     }
 ]
 

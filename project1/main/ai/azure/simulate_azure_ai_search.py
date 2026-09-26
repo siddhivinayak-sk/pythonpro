@@ -107,7 +107,7 @@ async def callback(
     return {"messages": messages["messages"], "stream": stream, "session_state": session_state, "context": context}
 
 async def main():
-    term_used_to_search = "Sopra Banking Cloud Platform (SBCP)"
+    term_used_to_search = "Banking Cloud Platform (BCP)"
     text = generate_text_from_index(term_used_to_search)
 
     outputs = await simulator(
@@ -116,10 +116,10 @@ async def main():
         num_queries=1,
         max_conversation_turns=1,
         tasks=[
-            f"I am a technical architect, I want to use {term_used_to_search} for application development, what are purpose for SBCP",
-            f"I am a technical architect, I want to use {term_used_to_search} for application development, what are features in SBCP",
-            f"I am a developer, I want to use {term_used_to_search} for application development, how to create a microservice using SBCP",
-            f"I am a developer, I want to use {term_used_to_search} for application development, how to create an endpoint for REST resource in SBCP",
+            f"I am a technical architect, I want to use {term_used_to_search} for application development, what are purpose for BCP",
+            f"I am a technical architect, I want to use {term_used_to_search} for application development, what are features in BCP",
+            f"I am a developer, I want to use {term_used_to_search} for application development, how to create a microservice using BCP",
+            f"I am a developer, I want to use {term_used_to_search} for application development, how to create an endpoint for REST resource in BCP",
         ],
     )
     print(outputs)

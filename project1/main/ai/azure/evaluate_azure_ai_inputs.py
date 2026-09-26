@@ -80,7 +80,7 @@ def simple_evaluator_function(
 # Query/Response Evaluation
 def simple_query_and_response_evaluate():
     # Query+response evaluation
-    qr_result = simple_evaluator_function(query="What is SBCP?", response="Sopra Banking Cloud Platform (SBCP) is a cloud-based platform for developing applications using microservices architecture.")
+    qr_result = simple_evaluator_function(query="What is BCP?", response="Banking Cloud Platform (BCP) is a cloud-based platform for developing applications using microservices architecture.")
     print(f"query/response output: {qr_result}")
 
 # Conversation Evaluation
