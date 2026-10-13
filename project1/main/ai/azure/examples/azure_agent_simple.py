@@ -1,18 +1,24 @@
-# Before running the sample, install the packages:
-#    pip install --pre azure-ai-projects>=2.0.0b1
-#    pip install azure-identity
+# pip install --pre "azure-ai-projects>=2.0.0b1" azure-identity python-dotenv
+#
+# Azure AI Foundry Agents - minimal example
+# Retrieves an existing agent from a Foundry project and asks it a question.
 
+import os
 from azure.identity import DefaultAzureCredential
 from azure.ai.projects import AIProjectClient
+from dotenv import load_dotenv
 
-myEndpoint = "https://<resource>.services.ai.azure.com/api/projects/<resource-name>"
+load_dotenv()
 
-project_client = AIProjectClient(endpoint=myEndpoint, credential=DefaultAzureCredential())
+# Full project endpoint, e.g.
+#   https://<resource>.services.ai.azure.com/api/projects/<project>
+project_endpoint = os.getenv("AZURE_AI_PROJECT_ENDPOINT")
+agent_name = os.getenv("AZURE_AI_AGENT_NAME", "learning-agent")
 
-myAgent = "learning-agent"
+project_client = AIProjectClient(endpoint=project_endpoint, credential=DefaultAzureCredential())
 
 # Get an existing agent
-agent = project_client.agents.get(agent_name=myAgent)
+agent = project_client.agents.get(agent_name=agent_name)
 print(f"Retrieved agent: {agent.name}")
 
 openai_client = project_client.get_openai_client()

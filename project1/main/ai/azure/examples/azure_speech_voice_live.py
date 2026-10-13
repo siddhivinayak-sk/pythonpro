@@ -432,7 +432,8 @@ def parse_arguments():
         "--endpoint",
         help="Azure VoiceLive endpoint",
         type=str,
-        default=os.environ.get("AZURE_VOICELIVE_ENDPOINT", "https://your-resource-name.services.ai.azure.com/"),
+        # Full endpoint, e.g. https://<resource>.services.ai.azure.com/
+        default=os.environ.get("AZURE_VOICELIVE_ENDPOINT"),
     )
 
     parser.add_argument(
